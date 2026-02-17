@@ -107,7 +107,6 @@
         .filtro-btn:hover {
             background-color: #ff6600;
             border-color: #e65c00;
-            /* QUITADO: transform: translateY(-2px); */
         }
         
         .filtro-btn.active {
@@ -135,6 +134,7 @@
         .vr-badge { background-color: #8a2be2; }
         .cloud-badge { background-color: #00ff15; }
         .geforce-badge { background-color: #009726; }
+        .borrar-badge { background-color: #0099ff; }
         
         body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
             font-family: 'Fredoka', sans-serif !important;
@@ -144,7 +144,6 @@
             font-family: 'Fredoka', sans-serif !important;
         }
         
-        /* SOLUCIÓN DEFINITIVA MEJORADA - ESTILO PARA QUITAR HOVER Y ACTIVE DURANTE SCROLL */
         .filtro-btn.force-no-hover,
         .filtro-btn.force-no-hover:active,
         .filtro-btn.force-no-hover:hover {
@@ -212,6 +211,7 @@
                 <button class="filtro-btn" data-plataforma="vr">VR</button>
                 <button class="filtro-btn" data-plataforma="cloud">Xbox Cloud Gaming</button>
                 <button class="filtro-btn" data-plataforma="geforce">NVIDIA GeForce NOW</button>
+                <button class="filtro-btn" data-plataforma="borrar">borrar</button>
             </div>
         </div>
         

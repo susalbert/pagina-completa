@@ -126,8 +126,6 @@ header a:hover{
     display: none;
 }
 
-/* ===== CARTAS ===== */
-
 #VideojuegosMas .programas{
     display: flex;
     justify-content: center;
