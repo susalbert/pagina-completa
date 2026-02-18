@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="media/icono.png" type="image/x-icon">
+    <title>Actualizaciones - XtremeGaming</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        h4 { font-size: 1.5em; }
+        p { font-size: 1.25em; }
+        
+        button {
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.5);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            color: white;
+            background-color: orangered;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        button:hover {
+            background-color: rgba(255, 72, 0, 0.8);
+        }
+        
+        button:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        
+        .color-acento {
+            color: orangered;
+        }
+
+        header {
+            background-color: rgb(245,245,245);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header .logo {
+            margin: 0;
+            padding: 25px 30px;
+            font-weight: bold;
+            color: orangered;
+            font-size: 1.6em;
+        }
+        
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header nav {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        
+        header a {
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+        }
+        
+        header a:hover {
+            color: orangered;
+        }
+
+        #actualizaciones-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding-top: 100px;
+            margin-top: 80px;
+        }
+        
+        #actualizaciones-hero h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        #actualizaciones-hero p {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        #actualizaciones-contenido {
+            padding: 100px 12px;
+            background-color: white;
+        }
+        
+        #actualizaciones-contenido h2 {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #333;
+        }
+
+        .changelog-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .update-entry {
+            background-color: #f5f5f5;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border-left: 4px solid orangered;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .update-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 15px;
+        }
+        
+        .update-header h3 {
+            margin: 0;
+            color: orangered;
+        }
+        
+        .update-version {
+            background-color: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .update-date {
+            color: #666;
+            font-style: italic;
+            margin-top: 5px;
+            font-size: 0.9em;
+        }
+        
+        .update-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .update-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .update-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .update-tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: bold;
+            color: white;
+            min-width: 80px;
+            text-align: center;
+        }
+        
+        .tag-nuevo { background-color: #4CAF50; }
+        .tag-mejora { background-color: #2196F3; }
+        .tag-correccion { background-color: #ff9800; }
+        
+        .feature-highlight {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #ff9800;
+        }
+        
+        .feature-highlight h4 {
+            color: #e65100;
+            margin-top: 0;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .suscripcion-section {
+            text-align: center;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        .suscripcion-input-group {
+            display: flex;
+            max-width: 500px;
+            margin: 20px auto;
+            gap: 10px;
+        }
+        
+        .suscripcion-input-group input {
+            flex: 1;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 1em;
+        }
+        
+        .suscripcion-input-group input:focus {
+            outline: none;
+            border-color: orangered;
+        }
+        
+        .suscripcion-mensaje {
+            margin-top: 10px;
+            font-size: 0.9em;
+            min-height: 20px;
+        }
+
+        footer {
+            background-color: rgb(230,230,230);
+            padding: 12px 0;
+            margin-top: 60px;
+        }
+        
+        footer p {
+            margin: 0;
+            padding: 12px;
+            color: rgb(100,100,100);
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        @media (min-width: 720px) {
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            header nav {
+                flex-direction: row;
+                padding-bottom: 0;
+                padding-right: 20px;
+            }
+            
+            #actualizaciones-hero h1 {
+                font-size: 4em;
+            }
+            
+            #actualizaciones-hero {
+                margin-top: 0;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .update-header {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .update-list li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .button-group {
+                flex-direction: column;
+            }
+            
+            .suscripcion-input-group {
+                flex-direction: column;
+            }
+        }
+        
+        body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
+            font-family: 'Fredoka', sans-serif !important;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <p class="logo">XtremeGaming</p>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#VideojuegosMas">Videojuegos</a>
+            <a href="tarjetas.html">Tarjetas Regalo</a>
+            <a href="dispositivos.html">Dispositivos</a>
+            <a href="dlc.html">DLC</a>
+            <a href="index.html#caracteristicas">Sobre Nosotros</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="ajustes.html">Ajustes</a>
+            <a href="carrito.html">Carrito</a>
+            <a href="sugerencias.html">Sugerencias</a>
+            <a href="actualizaciones.html" style="color: orangered;">Actualizaciones</a>
+        </nav>
+    </div>
+</header>
+
+<section id="actualizaciones-hero">
+    <h1>Actualizaciones</h1>
+    <p>Todo lo nuevo en XtremeGaming</p>
+</section>
+
+<section id="actualizaciones-contenido">
+    <div class="container">
+        <h2>Registro de cambios</h2>
+        
+        <div class="changelog-container">
+            
+            <div class="update-entry">
+                <div class="update-header">
+                    <h3>¡Nueva sección: DLC!</h3>
+                    <span class="update-version">v2.0.0</span>
+                </div>
+                <div class="update-date">18 de Febrero, 2026</div>
+                
+                <div class="feature-highlight">
+                    <h4>🎮 Ya puedes comprar DLCs</h4>
+                    <p>Hemos añadido una nueva sección donde encontrarás contenido descargable para tus juegos favoritos. Disponible en dos formatos:</p>
+                    <div style="display: flex; gap: 20px; justify-content: center; margin: 20px 0;">
+                        <div style="text-align: center;">
+                            <span style="font-size: 2em;">📦</span>
+                            <p><strong>Físico</strong><br>Recibe el DLC en caja</p>
+                        </div>
+                        <div style="text-align: center;">
+                            <span style="font-size: 2em;">🔑</span>
+                            <p><strong>Digital</strong><br>Código por email</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <ul class="update-list">
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Sección de DLCs:</strong> Ahora puedes comprar contenido descargable para tus juegos</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Formato físico:</strong> DLCs en caja con códigos exclusivos</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Formato digital:</strong> Recibe el código directamente en tu email</span>
+                    </li>
+                </ul>
+                
+                <div class="button-group">
+                    <button onclick="location.href='dlc.html'">Ir a DLCs</button>
+                    <button onclick="location.href='index.html'">Seguir explorando</button>
+                </div>
+            </div>
+            
+            <div class="update-entry">
+                <div class="update-header">
+                    <h3>Sistema de Puntos</h3>
+                    <span class="update-version">v1.5.0</span>
+                </div>
+                <div class="update-date">10 de Febrero, 2026</div>
+                
+                <ul class="update-list">
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Sistema de puntos:</strong> Canjea tus puntos por descuentos (100 puntos = $1)</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-mejora">MEJORA</span>
+                        <span><strong>Perfil:</strong> Ahora muestra tus puntos disponibles</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-correccion">CORRECION</span>
+                        <span><strong>Selector de Ediciones:</strong> Correcion que causaba errores en las interfaces de juegos con el Selector de Ediciones</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="update-entry">
+                <div class="update-header">
+                    <h3>Selector de Ediciones</h3>
+                    <span class="update-version">v1.2.0</span>
+                </div>
+                <div class="update-date">5 de Febrero, 2026</div>
+                
+                <ul class="update-list">
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Ediciones de juegos:</strong> Ahora puedes elegir entre Standard y Ediciones Especiales</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-mejora">MEJORA</span>
+                        <span><strong>Battlefield 6:</strong> Añadida Phantom Edition</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-mejora">MEJORA</span>
+                        <span><strong>Zelda:</strong> Añadida Nintendo Switch 2 Edition</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="update-entry">
+                <div class="update-header">
+                    <h3>Lanzamiento de XtremeGaming</h3>
+                    <span class="update-version">v1.0.0</span>
+                </div>
+                <div class="update-date">1 de Enero, 2026</div>
+                
+                <ul class="update-list">
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Lanzamiento oficial:</strong> Bienvenido a XtremeGaming</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Catálogo inicial:</strong> Videojuegos, tarjetas regalo y dispositivos</span>
+                    </li>
+                    <li>
+                        <span class="update-tag tag-nuevo">NUEVO</span>
+                        <span><strong>Sistema de filtros:</strong> Busca juegos por plataforma</span>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        
+        <div class="suscripcion-section">
+            <h3>¿Quieres estar al día?</h3>
+            <p>Sigue nuestras actualizaciones para no perderte nada</p>
+            <div class="suscripcion-input-group">
+                <input type="email" id="email-suscripcion" placeholder="Tu email">
+                <button id="btn-suscribirse">Suscribirme</button>
+            </div>
+            <div id="mensaje-suscripcion" class="suscripcion-mensaje"></div>
+        </div>
+        
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; XtremeGaming 2026 - Registro de Actualizaciones</p>
+    </div>
+</footer>
+
+<script>
+    document.getElementById('btn-suscribirse').addEventListener('click', function() {
+        const emailInput = document.getElementById('email-suscripcion');
+        const email = emailInput.value.trim();
+        const mensajeDiv = document.getElementById('mensaje-suscripcion');
+        
+        if (!email) {
+            mensajeDiv.textContent = '❌ Por favor, ingresa un email válido.';
+            mensajeDiv.style.color = 'red';
+            return;
+        }
+        
+        if (!email.includes('@') || !email.includes('.')) {
+            mensajeDiv.textContent = '❌ Por favor, ingresa un email válido (ej: nombre@dominio.com).';
+            mensajeDiv.style.color = 'red';
+            return;
+        }
+        
+        mensajeDiv.textContent = '✅ ¡Te has suscrito correctamente! Recibirás nuestras novedades.';
+        mensajeDiv.style.color = 'green';
+        
+        emailInput.value = '';
+        
+        this.disabled = true;
+        this.textContent = '¡Suscrito!';
+        
+        setTimeout(() => {
+            this.disabled = false;
+            this.textContent = 'Suscribirme';
+            mensajeDiv.textContent = '';
+        }, 3000);
+    });
+
+    document.getElementById('email-suscripcion').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('btn-suscribirse').click();
+        }
+    });
+</script>
+
+</body>
+</html>
