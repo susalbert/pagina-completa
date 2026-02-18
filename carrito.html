@@ -58,21 +58,45 @@
         .resumen-linea{ display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #ddd; font-family: 'Fredoka', sans-serif; }
         .resumen-linea:last-child{ border-bottom: none; font-weight: bold; font-size: 1.2em; color: orangered; }
 
-        .cupon-section { background: #f9f9f9; padding: 15px; border-radius: 10px; margin: 20px 0; }
-        .cupon-section h3 { font-family: 'Fredoka', sans-serif; }
-        .cupon-input { display: flex; gap: 10px; }
-        .cupon-input input { 
+        .cupon-section, .puntos-section { 
+            background: #f9f9f9; 
+            padding: 15px; 
+            border-radius: 10px; 
+            margin: 20px 0; 
+        }
+        .puntos-section { background: #fff3e0; border-left: 4px solid #ff9800; }
+        .cupon-section h3, .puntos-section h3 { 
+            font-family: 'Fredoka', sans-serif; 
+            margin-top: 0;
+        }
+        .cupon-input, .puntos-input { display: flex; gap: 10px; }
+        .cupon-input input, .puntos-input input { 
             flex: 1; 
             padding: 10px; 
             border: 1px solid #ddd; 
             border-radius: 5px; 
             font-family: 'Fredoka', sans-serif;
         }
-        .cupon-input input::placeholder {
+        .cupon-input input::placeholder, .puntos-input input::placeholder {
             font-family: 'Fredoka', sans-serif;
         }
         .cupon-btn { background-color: #28a745; font-family: 'Fredoka', sans-serif; }
-        .cupon-mensaje { margin-top: 10px; font-size: 0.9em; font-family: 'Fredoka', sans-serif; }
+        .puntos-btn { background-color: #ff9800; font-family: 'Fredoka', sans-serif; }
+        .cupon-mensaje, .puntos-mensaje { margin-top: 10px; font-size: 0.9em; font-family: 'Fredoka', sans-serif; }
+        .puntos-disponibles {
+            background: #fff; 
+            padding: 10px; 
+            border-radius: 8px; 
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+        }
+        .puntos-valor {
+            color: #ff9800;
+            font-size: 1.2em;
+        }
 
         footer{ background-color: rgb(230,230,230); }
         footer p{ margin: 0; padding: 12px; color: rgb(100,100,100); font-family: 'Fredoka', sans-serif; }
@@ -87,6 +111,7 @@
         @media (max-width: 768px){
             .carrito-item{ flex-wrap: wrap; }
             .item-imagen{ width: 80px; height: 80px; margin-right: 15px; }
+            .puntos-disponibles { flex-direction: column; gap: 10px; text-align: center; }
         }
         
         body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
@@ -109,7 +134,6 @@
             <a href="ajustes.html">Ajustes</a>
             <a href="carrito.html" style="color: orangered;">Carrito</a>
             <a href="sugerencias.html">Sugerencias</a>
-            </a>
         </nav>
     </div>
 </header>
@@ -142,7 +166,7 @@
             <div class="carrito-item" data-precio="59.99">
                 <img src="media/battledesktop.png" class="item-imagen">
                 <div class="item-info">
-                    <h3>Battlefield 6</h3>
+                    <h3>Battlefield 6 - Standard Edition</h3>
                     <p class="item-detalles">FPS - PC</p>
                     <p class="item-precio">$<span class="precio-total-item">59.99</span></p>
                 </div>
@@ -154,6 +178,22 @@
                 <button class="eliminar-btn">Eliminar</button>
             </div>
             
+            <div class="puntos-section">
+                <h3>🎮 Canjear Puntos Xtreme</h3>
+                <div class="puntos-disponibles">
+                    <span>Tus puntos disponibles:</span>
+                    <span class="puntos-valor" id="puntos-disponibles">1,250</span>
+                </div>
+                <div class="puntos-input">
+                    <input type="number" id="puntos" placeholder="Ej: 100, 200, 300... (máx 1000)" min="0" max="1000" step="100">
+                    <button id="aplicar-puntos" class="puntos-btn">Canjear</button>
+                </div>
+                <div id="puntos-mensaje" class="puntos-mensaje"></div>
+                <p style="font-size: 0.85em; color: #666; margin-top: 10px;">
+                    💡 100 puntos = $1 de descuento | Máximo 1000 puntos ($10)
+                </p>
+            </div>
+            
             <div class="cupon-section">
                 <h3>Código de descuento [Limitado a 1 por compra]</h3>
                 <div class="cupon-input">
@@ -161,7 +201,6 @@
                     <button id="aplicar-cupon" class="cupon-btn">Aplicar</button>
                 </div>
                 <div id="cupon-mensaje" class="cupon-mensaje"></div>
-                </p>
             </div>
             
             <div class="resumen">
@@ -169,16 +208,20 @@
                     <span>Subtotal:</span>
                     <span id="subtotal">$119.98</span>
                 </div>
-                <div class="resumen-linea" id="linea-descuento" style="display:none;">
-                    <span>Descuento:</span>
-                    <span id="descuento">-$0.00</span>
+                <div class="resumen-linea" id="linea-descuento-puntos" style="display:none;">
+                    <span>Descuento puntos:</span>
+                    <span id="descuento-puntos">-$0.00</span>
+                </div>
+                <div class="resumen-linea" id="linea-descuento-cupon" style="display:none;">
+                    <span>Descuento cupón (10%):</span>
+                    <span id="descuento-cupon">-$0.00</span>
                 </div>
                 <div class="resumen-linea">
                     <span>Impuestos (10%):</span>
                     <span id="impuestos">$12.00</span>
                 </div>
                 <div class="resumen-linea">
-                    <span>Enví­o:</span>
+                    <span>Envío:</span>
                     <span>$0.00</span>
                 </div>
                 <div class="resumen-linea">
@@ -204,8 +247,11 @@
 <script>
     let cuponUsado = false;
     let descuentoPorcentaje = 0;
-    
     const codigosValidos = ["PRUEBA1", "PRUEBA2", "PRUEBA3"];
+    
+    let puntosDisponibles = 1250;
+    let puntosCanjeados = 0;
+    let puntosActivos = false;
     
     function actualizarPrecioItem(item) {
         const precioUnitario = parseFloat(item.getAttribute('data-precio'));
@@ -227,25 +273,41 @@
             actualizarPrecioItem(item);
         });
         
-        let descuentoMonto = 0;
-        if (descuentoPorcentaje > 0) {
-            descuentoMonto = subtotal * (descuentoPorcentaje / 100);
+        let descuentoPuntosMonto = 0;
+        if (puntosActivos) {
+            descuentoPuntosMonto = puntosCanjeados * 0.01;
         }
         
-        const subtotalConDescuento = subtotal - descuentoMonto;
-        const impuestos = subtotalConDescuento * 0.10;
-        const total = subtotalConDescuento + impuestos;
+        let subtotalConPuntos = subtotal - descuentoPuntosMonto;
+        let descuentoCuponMonto = 0;
+        if (descuentoPorcentaje > 0) {
+            descuentoCuponMonto = subtotalConPuntos * (descuentoPorcentaje / 100);
+        }
+        
+        const subtotalConDescuentos = subtotalConPuntos - descuentoCuponMonto;
+        const impuestos = subtotalConDescuentos * 0.10;
+        const total = subtotalConDescuentos + impuestos;
         
         document.getElementById('subtotal').textContent = "$" + subtotal.toFixed(2);
-        document.getElementById('descuento').textContent = "-$" + descuentoMonto.toFixed(2);
+        
+        if (descuentoPuntosMonto > 0) {
+            document.getElementById('linea-descuento-puntos').style.display = "flex";
+            document.getElementById('descuento-puntos').textContent = "-$" + descuentoPuntosMonto.toFixed(2);
+        } else {
+            document.getElementById('linea-descuento-puntos').style.display = "none";
+        }
+        
+        if (descuentoCuponMonto > 0) {
+            document.getElementById('linea-descuento-cupon').style.display = "flex";
+            document.getElementById('descuento-cupon').textContent = "-$" + descuentoCuponMonto.toFixed(2);
+        } else {
+            document.getElementById('linea-descuento-cupon').style.display = "none";
+        }
+        
         document.getElementById('impuestos').textContent = "$" + impuestos.toFixed(2);
         document.getElementById('total').textContent = "$" + total.toFixed(2);
         
-        if (descuentoMonto > 0) {
-            document.getElementById('linea-descuento').style.display = "flex";
-        } else {
-            document.getElementById('linea-descuento').style.display = "none";
-        }
+        document.getElementById('puntos-disponibles').textContent = puntosDisponibles.toLocaleString();
     }
     
     document.querySelectorAll('.cantidad-btn').forEach(boton => {
@@ -299,6 +361,56 @@
         
         mensaje.textContent = "¡Cupón aplicado! 10% de descuento";
         mensaje.style.color = "green";
+    };
+    
+    document.getElementById('aplicar-puntos').onclick = function() {
+        const puntosInput = document.getElementById('puntos');
+        const puntos = parseInt(puntosInput.value);
+        const mensaje = document.getElementById('puntos-mensaje');
+        
+        if (isNaN(puntos) || puntos <= 0) {
+            mensaje.textContent = "Por favor, ingresa un número válido de puntos";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntos % 100 !== 0) {
+            mensaje.textContent = "❌ Solo puedes canjear puntos de 100 en 100 (100, 200, 300...)";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntos > 1000) {
+            mensaje.textContent = "❌ El máximo de puntos que puedes canjear es 1000 ($10)";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntos > puntosDisponibles) {
+            mensaje.textContent = `❌ No tienes suficientes puntos. Disponibles: ${puntosDisponibles}`;
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        if (puntosActivos) {
+            mensaje.textContent = "Ya has canjeado puntos en esta compra. Solo puedes usar puntos una vez.";
+            mensaje.style.color = "red";
+            return;
+        }
+        
+        puntosCanjeados = puntos;
+        puntosActivos = true;
+        puntosDisponibles -= puntos;
+        
+        puntosInput.disabled = true;
+        this.disabled = true;
+        this.textContent = "Canjeado";
+        this.style.backgroundColor = "#666";
+        
+        mensaje.textContent = `✅ ¡Has canjeado ${puntos} puntos! Descuento de $${(puntos * 0.01).toFixed(2)}`;
+        mensaje.style.color = "green";
+        
+        calcularTotal();
     };
     
     calcularTotal();

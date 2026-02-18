@@ -132,7 +132,7 @@
         .xbox-badge { background-color: #107c10; }
         .pc-badge { background-color: #333; }
         .vr-badge { background-color: #8a2be2; }
-        .cloud-badge { background-color: #00ff15; }
+        .cloud-badge { background-color: #00ff15; color: white; }
         .geforce-badge { background-color: #009726; }
         
         body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
@@ -152,6 +152,72 @@
             box-shadow: none !important;
             transition: none !important;
             cursor: default !important;
+        }
+
+        .carta {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        
+        .programas {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .edicion-container {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 15px 0;
+        }
+        
+        .edicion-badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 110px;
+        }
+        
+        .edicion-nombre {
+            background-color: #666;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .edicion-precio {
+            background-color: #f0f0f0;
+            color: orangered;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-top: 5px;
+            width: 100%;
+            text-align: center;
+            transition: all 0.2s;
+        }
+        
+        .edicion-badge.selected .edicion-nombre {
+            background-color: orangered;
+            box-shadow: 0 2px 8px rgba(255, 69, 0, 0.3);
+        }
+        
+        .edicion-badge.selected .edicion-precio {
+            background-color: #ffe0d1;
         }
     </style>
 </head>
@@ -242,21 +308,49 @@
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>
             </div>
 
-            <div class="carta game-card" data-name="Battlefield 6" data-genre="FPS" data-plataformas="pc,playstation,xbox,geforce">
+            <div class="carta game-card" id="battlefield-card" data-name="Battlefield 6" data-genre="FPS" data-plataformas="pc,playstation,xbox,geforce">
                 <h3>Battlefield 6 
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
                     <span class="plataforma-badge pc-badge">PC</span>
                     <span class="plataforma-badge geforce-badge">GeForce</span>
                 </h3>
-                <p>FPS</p>
-                <button onclick="location.href='carrito.html'">Añadir al carro</button>
+                <p>FPS - Elige tu edición</p>
+                
+                <div class="edicion-container">
+                    <div onclick="selectEdition('battlefield', 'standard', this)" class="edicion-badge">
+                        <span class="edicion-nombre">Standard</span>
+                        <span class="edicion-precio">$59.99</span>
+                    </div>
+                    
+                    <div onclick="selectEdition('battlefield', 'phantom', this)" class="edicion-badge">
+                        <span class="edicion-nombre">Phantom ⚡</span>
+                        <span class="edicion-precio">$89.99</span>
+                    </div>
+                </div>
+                
+                <button id="battlefield-btn" onclick="addToCartWithEdition('battlefield')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
             </div>
 
-            <div class="carta game-card" data-name="The Legend of Zelda: Tears of the Kingdom" data-genre="Aventura" data-plataformas="nintendo">
-                <h3>The Legend of Zelda: Tears of the Kingdom <span class="plataforma-badge nintendo-badge">Nintendo</span></h3>
-                <p>Aventura</p>
-                <button onclick="location.href='carrito.html'">Añadir al carro</button>
+            <div class="carta game-card" id="zelda-card" data-name="The Legend of Zelda: Tears of the Kingdom" data-genre="Aventura" data-plataformas="nintendo">
+                <h3>The Legend of Zelda: Tears of the Kingdom 
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p>Aventura - Elige tu edición</p>
+                
+                <div class="edicion-container">
+                    <div onclick="selectEdition('zelda', 'standard', this)" class="edicion-badge">
+                        <span class="edicion-nombre">Standard</span>
+                        <span class="edicion-precio">$59.99</span>
+                    </div>
+                    
+                    <div onclick="selectEdition('zelda', 'switch2', this)" class="edicion-badge">
+                        <span class="edicion-nombre">Switch 2 🚀</span>
+                        <span class="edicion-precio">$79.99</span>
+                    </div>
+                </div>
+                
+                <button id="zelda-btn" onclick="addToCartWithEdition('zelda')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
             </div>
 
             <div class="carta game-card" data-name="Hollow Knight: Silksong" data-genre="Platformer 2D" data-plataformas="pc,nintendo,playstation,xbox,cloud">
@@ -306,6 +400,72 @@
 
 <script>
     let plataformasSeleccionadas = ['todos'];
+    
+    let selectedEdition = {
+        battlefield: null,
+        zelda: null
+    };
+
+    function selectEdition(game, edition, element) {
+        const parent = element.parentNode;
+        Array.from(parent.children).forEach(child => {
+            child.classList.remove('selected');
+        });
+        
+        element.classList.add('selected');
+        selectedEdition[game] = edition;
+        
+        const btn = document.getElementById(game + '-btn');
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    }
+
+    function addToCartWithEdition(game) {
+        if (!selectedEdition[game]) {
+            alert('Por favor, selecciona una edición');
+            return;
+        }
+        
+        let nombre, precio, edicionTexto;
+        
+        if (game === 'battlefield') {
+            nombre = 'Battlefield 6';
+            if (selectedEdition[game] === 'standard') {
+                precio = 59.99;
+                edicionTexto = 'Standard Edition';
+            } else {
+                precio = 89.99;
+                edicionTexto = 'Phantom Edition';
+            }
+        } else if (game === 'zelda') {
+            nombre = 'The Legend of Zelda: Tears of the Kingdom';
+            if (selectedEdition[game] === 'standard') {
+                precio = 59.99;
+                edicionTexto = 'Standard Edition';
+            } else {
+                precio = 79.99;
+                edicionTexto = 'Nintendo Switch 2 Edition';
+            }
+        }
+        
+        const producto = {
+            nombre: nombre,
+            edicion: edicionTexto,
+            precio: precio,
+            cantidad: 1
+        };
+        
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        alert(`✓ Añadido: ${nombre} - ${edicionTexto} ($${precio})`);
+        
+        if (confirm('¿Ir al carrito?')) {
+            window.location.href = 'carrito.html';
+        }
+    }
     
     function filterGames(searchTerm) {
         const games = document.querySelectorAll('.game-card');

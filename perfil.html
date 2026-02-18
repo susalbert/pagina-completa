@@ -50,7 +50,6 @@
             padding: 0 20px;
         }
 
-        /* Header - IGUAL QUE LAS OTRAS PÁGINAS */
         header {
             background-color: rgb(245,245,245);
             width: 100%;
@@ -92,7 +91,6 @@
             color: orangered;
         }
 
-        /* Hero Section */
         #perfil-hero {
             display: flex;
             align-items: center;
@@ -121,7 +119,6 @@
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* Contenido principal */
         #perfil-contenido {
             padding: 100px 12px;
             background-color: white;
@@ -134,7 +131,6 @@
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* Tarjeta de perfil */
         .perfil-card {
             background-color: #f5f5f5;
             padding: 30px;
@@ -182,7 +178,6 @@
             color: #666;
         }
 
-        /* Grid de juegos */
         .juegos-grid {
             display: flex;
             justify-content: center;
@@ -211,7 +206,6 @@
             font-family: 'Fredoka', sans-serif;
         }
 
-        /* Historial - CORREGIDO */
         .historial-item {
             background-color: white;
             padding: 15px 20px;
@@ -250,7 +244,6 @@
             white-space: nowrap;
         }
 
-        /* Footer */
         footer {
             background-color: rgb(230,230,230);
             padding: 12px 0;
@@ -270,7 +263,6 @@
             height: 150px;
         }
 
-        /* Media Queries */
         @media (min-width: 720px) {
             header .container {
                 flex-direction: row;
@@ -315,7 +307,6 @@
             }
         }
         
-        /* Asegurar Fredoka en todos los elementos */
         body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
             font-family: 'Fredoka', sans-serif !important;
         }
@@ -347,7 +338,6 @@
 
 <section id="perfil-contenido">
     <div class="container">
-        <!-- Tarjeta de perfil -->
         <div class="perfil-card">
             <div class="avatar">E</div>
             <h2>Ejemplo</h2>
@@ -365,23 +355,22 @@
                 </div>
                 <div class="estadistica">
                     <span class="numero">1,250</span>
-                    <span class="label">Puntos</span>
+                    <span class="label">Puntos Xtreme</span>
                 </div>
             </div>
         </div>
         
-        <!-- Mis juegos -->
         <h2>Mis Juegos</h2>
         <div class="juegos-grid">
             <div class="juego-card">
                 <h3>Super Mario Odyssey</h3>
                 <p>Platformer 3D</p>
-                <p>Comprado: 15/03/2024</p>
+                <p>Comprado: 15/03/2023</p>
                 <button onclick="alert('Iniciando juego: Super Mario Odyssey')">Jugar</button>
             </div>
             
             <div class="juego-card">
-                <h3>Battlefield 6</h3>
+                <h3>Battlefield 6 - Phantom Edition</h3>
                 <p>FPS</p>
                 <p>Comprado: 10/02/2024</p>
                 <button onclick="alert('Iniciando juego: Battlefield 6')">Jugar</button>
@@ -390,18 +379,17 @@
             <div class="juego-card">
                 <h3>Undertale</h3>
                 <p>RPG</p>
-                <p>Comprado: 05/01/2024</p>
+                <p>Comprado: 05/01/2025</p>
                 <button onclick="alert('Iniciando juego: Undertale')">Jugar</button>
             </div>
         </div>
         
-        <!-- Historial de compras - CORREGIDO (fecha al lado) -->
         <h2>Historial de Compras</h2>
         <div class="perfil-card" style="padding: 20px;">
             <div class="historial-item">
                 <div>
                     <h3>The Legend of Zelda</h3>
-                    <span class="fecha">15 de Marzo, 2024</span>
+                    <span class="fecha">15 de Marzo, 2023</span>
                 </div>
                 <span class="precio">$59.99</span>
             </div>
@@ -416,10 +404,10 @@
             
             <div class="historial-item">
                 <div>
-                    <h3>Battlefield 6 - Deluxe</h3>
-                    <span class="fecha">5 de Enero, 2024</span>
+                    <h3>Battlefield 6 - Phantom Edition</h3>
+                    <span class="fecha">5 de Enero, 2025</span>
                 </div>
-                <span class="precio">$79.99</span>
+                <span class="precio">$89.99</span>
             </div>
         </div>
 </section>
