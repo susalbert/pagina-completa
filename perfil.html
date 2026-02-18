@@ -1,38 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Próximamente - XtremeGaming</title>
+    <title>Perfil - XtremeGaming</title>
     <link rel="icon" href="media/icono.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* AÑADE ESTO PRIMERO */
-        body {
-            padding-top: 80px; /* COMPENSA el header fixed */
-            margin: 0;
+        * {
+            box-sizing: border-box;
             font-family: 'Fredoka', sans-serif;
         }
         
-        *{
-            box-sizing: border-box;
-        }
-
-        html{
+        html {
             scroll-behavior: smooth;
         }
-
-        h1{ font-size: 3.5em; font-family: 'Fredoka', sans-serif;}
-        h2{ font-size: 2.7em; font-family: 'Fredoka', sans-serif;}
-        h3{ font-size: 2em; font-family: 'Fredoka', sans-serif;}
-        p{ font-size: 1.25em; font-family: 'Fredoka', sans-serif;}
-        ul{ list-style: none;}
-        li{ font-size: 1.25em; font-family: 'Fredoka', sans-serif;}
-
-        button{
-            font-size: 1.5em;
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        p { font-size: 1.25em; }
+        
+        button {
+            font-size: 1em;
             font-weight: bold;
-            padding: 10px 30px;
+            padding: 10px 20px;
             border-radius: 10px;
             border: 1px solid rgba(0,0,0,0.5);
             box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
@@ -41,144 +39,283 @@
             cursor: pointer;
             font-family: 'Fredoka', sans-serif;
         }
-
-        button:hover{
+        
+        button:hover {
             background-color: rgba(255, 72, 0, 0.8);
         }
-
-        .container{
+        
+        .container {
             max-width: 1400px;
             margin: auto;
+            padding: 0 20px;
         }
 
-        .color-acento{ color:orangered; }
-
-        /* HEADER FIXED CORRECTO */
-        header{
+        /* Header - IGUAL QUE LAS OTRAS PÁGINAS */
+        header {
             background-color: rgb(245,245,245);
+            width: 100%;
             position: fixed;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
-            width: 100%;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
-
-        header .logo{
+        
+        header .logo {
             margin: 0;
             padding: 25px 30px;
             font-weight: bold;
             color: orangered;
             font-size: 1.6em;
-            font-family: 'Fredoka', sans-serif;
         }
-
-        header .container{
+        
+        header .container {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
-        header nav{
+        
+        header nav {
             display: flex;
             flex-direction: column;
             text-align: center;
             padding-bottom: 25px;
         }
-
-        header a{
+        
+        header a {
             padding: 5px 12px;
             text-decoration: none;
             font-weight: bold;
             color: black;
             font-family: 'Fredoka', sans-serif;
         }
-
-        header a:hover{
+        
+        header a:hover {
             color: orangered;
         }
 
-        #proximamente-hero{
+        /* Hero Section */
+        #perfil-hero {
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             flex-direction: column;
-            height: 60vh;
-            background-image: linear-gradient(
-                0deg,
-                rgba(0,0,0,0.7),
-                rgba(0,0,0,0.7)
-            ),
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
             url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center center;
-            margin-top: 0; /* Asegúrate que sea 0 */
+            padding-top: 100px;
+            margin-top: 80px;
         }
-
-        #proximamente-hero h1{
+        
+        #perfil-hero h1 {
             color: white;
             margin-bottom: 20px;
             font-family: 'Fredoka', sans-serif;
         }
-
-        #proximamente-hero p{
+        
+        #perfil-hero p {
+            color: white;
+            font-size: 1.5em;
             font-family: 'Fredoka', sans-serif;
         }
 
-        .icono-proximamente {
-            font-size: 4em;
-            margin-bottom: 20px;
+        /* Contenido principal */
+        #perfil-contenido {
+            padding: 100px 12px;
+            background-color: white;
+        }
+        
+        #perfil-contenido h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-family: 'Fredoka', sans-serif;
         }
 
-        .mensaje-proximamente {
+        /* Tarjeta de perfil */
+        .perfil-card {
             background-color: #f5f5f5;
-            padding: 40px;
-            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
             max-width: 800px;
-            margin: 50px auto;
-            border-left: 5px solid orangered;
+            border-radius: 10px;
+            border-left: 4px solid orangered;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
             text-align: center;
         }
-
-        footer{
-            background-color: rgb(230,230,230);
+        
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: orangered;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 2.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .estadisticas {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .estadistica {
+            text-align: center;
+        }
+        
+        .numero {
+            font-size: 2em;
+            font-weight: bold;
+            color: orangered;
+            display: block;
+        }
+        
+        .label {
+            color: #666;
         }
 
-        footer p{
-            margin: 0;
-            padding: 12px;
-            color: rgb(100,100,100);
+        /* Grid de juegos */
+        .juegos-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .juego-card {
+            width: 250px;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .juego-card h3 {
+            margin: 0 0 10px 0;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .juego-card p {
+            color: #666;
+            margin: 5px 0;
             font-family: 'Fredoka', sans-serif;
         }
 
-        footer .container{
-            height: 150px;
-            justify-content: center;
+        /* Historial - CORREGIDO */
+        .historial-item {
+            background-color: white;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid orangered;
             display: flex;
-            align-items: flex-end;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .historial-item > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 1;
+            margin-right: 20px;
+        }
+        
+        .historial-item h3 {
+            margin: 0;
+            font-size: 1.2em;
+        }
+        
+        .fecha {
+            color: #666;
+            font-size: 0.9em;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+        
+        .precio {
+            color: orangered;
+            font-weight: bold;
+            font-size: 1.1em;
+            white-space: nowrap;
         }
 
-        @media (min-width: 720px){
-            header .container{
+        /* Footer */
+        footer {
+            background-color: rgb(230,230,230);
+            padding: 12px 0;
+        }
+        
+        footer p {
+            margin: 0;
+            padding: 12px;
+            color: rgb(100,100,100);
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        /* Media Queries */
+        @media (min-width: 720px) {
+            header .container {
                 flex-direction: row;
                 justify-content: space-between;
             }
-
-            header nav{
+            
+            header nav {
                 flex-direction: row;
                 padding-bottom: 0;
                 padding-right: 20px;
             }
-
-            #proximamente-hero h1{
+            
+            #perfil-hero h1 {
                 font-size: 4em;
+            }
+            
+            #perfil-hero {
+                margin-top: 0;
             }
         }
         
+        @media (max-width: 768px) {
+            .estadisticas {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .historial-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .historial-item > div {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+                flex-wrap: wrap;
+            }
+            
+            .fecha {
+                margin-left: 0;
+            }
+        }
+        
+        /* Asegurar Fredoka en todos los elementos */
         body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
             font-family: 'Fredoka', sans-serif !important;
         }
@@ -195,7 +332,7 @@
             <a href="tarjetas.html">Tarjetas Regalo</a>
             <a href="dispositivos.html">Dispositivos</a>
             <a href="index.html#caracteristicas">Sobre Nosotros</a>
-            <a href="perfil.html">Perfil</a>
+            <a href="perfil.html" style="color: orangered;">Perfil</a>
             <a href="ajustes.html">Ajustes</a>
             <a href="carrito.html">Carrito</a>
             <a href="sugerencias.html">Sugerencias</a>
@@ -203,30 +340,93 @@
     </div>
 </header>
 
-<section id="proximamente-hero">
-    <div class="icono-proximamente">🚧</div>
-    <h1>Próximamente</h1>
-    <p style="color: white; font-size: 1.5em;">Esta página está en construcción</p>
+<section id="perfil-hero">
+    <h1>Mi Perfil</h1>
+    <p>Bienvenido a tu espacio personal</p>
 </section>
 
-<section style="padding: 100px 12px; background-color: white;">
+<section id="perfil-contenido">
     <div class="container">
-        <div class="mensaje-proximamente">
-            <h2>¡Estamos trabajando en esto!</h2>
-            <p>Esta sección de nuestra tienda estará disponible muy pronto. Estamos preparando algo increíble para ti.</p>
-            <p>Mientras tanto, puedes explorar nuestras otras secciones o contactarnos si necesitas ayuda.</p>
+        <!-- Tarjeta de perfil -->
+        <div class="perfil-card">
+            <div class="avatar">E</div>
+            <h2>Ejemplo</h2>
+            <p>ejemplo@email.com</p>
+            <p>Miembro desde: Enero 2023</p>
             
-            <div style="margin-top: 40px;">
-                <button onclick="location.href='index.html'">Volver al Inicio</button>
-                <button onclick="location.href='sugerencias.html'" style="margin-left: 20px; background-color: #666;">Enviar Sugerencia</button>
+            <div class="estadisticas">
+                <div class="estadistica">
+                    <span class="numero">8</span>
+                    <span class="label">Compras</span>
+                </div>
+                <div class="estadistica">
+                    <span class="numero">4</span>
+                    <span class="label">Juegos</span>
+                </div>
+                <div class="estadistica">
+                    <span class="numero">1,250</span>
+                    <span class="label">Puntos</span>
+                </div>
             </div>
         </div>
-    </div>
+        
+        <!-- Mis juegos -->
+        <h2>Mis Juegos</h2>
+        <div class="juegos-grid">
+            <div class="juego-card">
+                <h3>Super Mario Odyssey</h3>
+                <p>Platformer 3D</p>
+                <p>Comprado: 15/03/2024</p>
+                <button onclick="alert('Iniciando juego: Super Mario Odyssey')">Jugar</button>
+            </div>
+            
+            <div class="juego-card">
+                <h3>Battlefield 6</h3>
+                <p>FPS</p>
+                <p>Comprado: 10/02/2024</p>
+                <button onclick="alert('Iniciando juego: Battlefield 6')">Jugar</button>
+            </div>
+            
+            <div class="juego-card">
+                <h3>Undertale</h3>
+                <p>RPG</p>
+                <p>Comprado: 05/01/2024</p>
+                <button onclick="alert('Iniciando juego: Undertale')">Jugar</button>
+            </div>
+        </div>
+        
+        <!-- Historial de compras - CORREGIDO (fecha al lado) -->
+        <h2>Historial de Compras</h2>
+        <div class="perfil-card" style="padding: 20px;">
+            <div class="historial-item">
+                <div>
+                    <h3>The Legend of Zelda</h3>
+                    <span class="fecha">15 de Marzo, 2024</span>
+                </div>
+                <span class="precio">$59.99</span>
+            </div>
+            
+            <div class="historial-item">
+                <div>
+                    <h3>Tarjeta de Regalo $50</h3>
+                    <span class="fecha">10 de Febrero, 2024</span>
+                </div>
+                <span class="precio">$50.00</span>
+            </div>
+            
+            <div class="historial-item">
+                <div>
+                    <h3>Battlefield 6 - Deluxe</h3>
+                    <span class="fecha">5 de Enero, 2024</span>
+                </div>
+                <span class="precio">$79.99</span>
+            </div>
+        </div>
 </section>
 
 <footer>
     <div class="container">
-        <p>&copy; XtremeGaming 2026 - Perfil</p>
+        <p>&copy; XtremeGaming 2026 - Mi Perfil</p>
     </div>
 </footer>
 
