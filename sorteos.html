@@ -817,16 +817,24 @@
     
     const iconos = ["🎮", "💻", "🕹️", "👾", "🖥️"];
     
-    function generarParticipanteAleatorio() {
-        const nombre = nombresParticipantes[Math.floor(Math.random() * nombresParticipantes.length)];
-        const icono = iconos[Math.floor(Math.random() * iconos.length)];
-        const numSorteos = Math.floor(Math.random() * 5) + 1;
+    function generarParticipantesUnicos(cantidad) {
+        const participantes = [];
+        const nombresDisponibles = [...nombresParticipantes];
         
-        return {
-            nombre: nombre,
-            icono: icono,
-            sorteos: numSorteos
-        };
+        for (let i = nombresDisponibles.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [nombresDisponibles[i], nombresDisponibles[j]] = [nombresDisponibles[j], nombresDisponibles[i]];
+        }
+        
+        for (let i = 0; i < Math.min(cantidad, nombresDisponibles.length); i++) {
+            participantes.push({
+                nombre: nombresDisponibles[i],
+                icono: iconos[Math.floor(Math.random() * iconos.length)],
+                sorteos: Math.floor(Math.random() * 5) + 1
+            });
+        }
+        
+        return participantes;
     }
     
     function crearElementoParticipante(participante) {
@@ -852,13 +860,12 @@
         setTimeout(() => {
             container.innerHTML = '';
             
-            const numParticipantes = Math.floor(Math.random() * 3) + 4;
+            const numParticipantes = Math.floor(Math.random() * 3) + 4; // 4-6 participantes
+            const nuevosParticipantes = generarParticipantesUnicos(numParticipantes);
             
-            for (let i = 0; i < numParticipantes; i++) {
-                const participante = generarParticipanteAleatorio();
-                const elemento = crearElementoParticipante(participante);
-                container.appendChild(elemento);
-            }
+            nuevosParticipantes.forEach(p => {
+                container.appendChild(crearElementoParticipante(p));
+            });
         }, 400);
     }
     
