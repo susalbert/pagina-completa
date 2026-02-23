@@ -450,6 +450,7 @@
             <a href="carrito.html">Carrito</a>
             <a href="sugerencias.html">Sugerencias</a>
             <a href="actualizaciones.html">Registro de cambios</a>
+            <a href="sorteos.html" style="color: orangered;">Sorteos</a>
         </nav>
     </div>
 </header>
@@ -817,9 +818,20 @@
     
     const iconos = ["🎮", "💻", "🕹️", "👾", "🖥️"];
     
+    let ultimoNombreUsado = null;
+    
     function generarParticipantesUnicos(cantidad) {
         const participantes = [];
-        const nombresDisponibles = [...nombresParticipantes];
+        
+        let nombresDisponibles = [...nombresParticipantes];
+        
+        if (ultimoNombreUsado) {
+            nombresDisponibles = nombresDisponibles.filter(n => n !== ultimoNombreUsado);
+        }
+        
+        if (nombresDisponibles.length < cantidad) {
+            nombresDisponibles = nombresParticipantes.filter(n => n !== ultimoNombreUsado);
+        }
         
         for (let i = nombresDisponibles.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -832,6 +844,10 @@
                 icono: iconos[Math.floor(Math.random() * iconos.length)],
                 sorteos: Math.floor(Math.random() * 5) + 1
             });
+        }
+        
+        if (participantes.length > 0) {
+            ultimoNombreUsado = participantes[participantes.length - 1].nombre;
         }
         
         return participantes;
@@ -881,6 +897,10 @@
             { nombre: "GameLover", icono: "👾", sorteos: 3 },
             { nombre: "BattlefieldPro", icono: "🖥️", sorteos: 2 }
         ];
+        
+        if (participantesIniciales.length > 0) {
+            ultimoNombreUsado = participantesIniciales[participantesIniciales.length - 1].nombre;
+        }
         
         participantesIniciales.forEach(p => {
             container.appendChild(crearElementoParticipante(p));
