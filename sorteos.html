@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorteos - XtremeGaming</title>
+    <link rel="icon" href="media/icono.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Fredoka', sans-serif !important;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            margin: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        
+        h1 { font-size: 3.5em; }
+        h2 { font-size: 2.7em; }
+        h3 { font-size: 2em; }
+        h4 { font-size: 1.5em; }
+        p { font-size: 1.25em; }
+        
+        button {
+            font-size: 1em;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(0,0,0,0.5);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            color: white;
+            background-color: orangered;
+            cursor: pointer;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        button:hover {
+            background-color: rgba(255, 72, 0, 0.8);
+        }
+        
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: auto;
+            padding: 0 20px;
+        }
+        
+        .color-acento {
+            color: orangered;
+        }
+
+        header {
+            background-color: rgb(245,245,245);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        header .logo {
+            margin: 0;
+            padding: 25px 30px;
+            font-weight: bold;
+            color: orangered;
+            font-size: 1.6em;
+        }
+        
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header nav {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        
+        header a {
+            padding: 5px 12px;
+            text-decoration: none;
+            font-weight: bold;
+            color: black;
+        }
+        
+        header a:hover {
+            color: orangered;
+        }
+
+        #sorteos-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+            height: 40vh;
+            background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+            url(media/room-with-lot-games-video-game-wall_875765-5370.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center center;
+            padding-top: 100px;
+            margin-top: 80px;
+        }
+        
+        #sorteos-hero h1 {
+            color: white;
+            margin-bottom: 20px;
+        }
+        
+        #sorteos-hero p {
+            color: white;
+            font-size: 1.5em;
+        }
+
+        .puntos-bar {
+            background: linear-gradient(135deg, #ff9800, #ff6b6b);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            display: inline-block;
+            margin: 20px auto;
+            font-weight: bold;
+            font-size: 1.2em;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .puntos-valor {
+            font-size: 1.5em;
+            margin-left: 10px;
+            background: white;
+            color: #ff9800;
+            padding: 5px 15px;
+            border-radius: 30px;
+        }
+
+        .sorteos-container {
+            overflow-x: auto;
+            padding: 20px 0;
+            margin: 40px 0;
+            white-space: nowrap;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: orangered #f0f0f0;
+        }
+        
+        .sorteos-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        
+        .sorteos-container::-webkit-scrollbar-track {
+            background: #f0f0f0;
+            border-radius: 10px;
+        }
+        
+        .sorteos-container::-webkit-scrollbar-thumb {
+            background: orangered;
+            border-radius: 10px;
+        }
+        
+        .sorteos-fila {
+            display: inline-flex;
+            gap: 25px;
+            padding: 0 10px;
+        }
+        
+        .sorteo-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            border: 2px solid transparent;
+            width: 320px;
+            display: inline-block;
+            vertical-align: top;
+            white-space: normal;
+        }
+        
+        .sorteo-card:hover {
+            transform: translateY(-5px);
+            border-color: orangered;
+        }
+        
+        .sorteo-imagen {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            color: #999;
+        }
+        
+        .sorteo-contenido {
+            padding: 15px;
+        }
+        
+        .sorteo-titulo {
+            font-size: 1.2em;
+            font-weight: bold;
+            margin: 0 0 5px 0;
+            white-space: normal;
+        }
+        
+        .sorteo-categoria {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .categoria-juego { background-color: #4CAF50; color: white; }
+        .categoria-tarjeta { background-color: #2196F3; color: white; }
+        .categoria-dispositivo { background-color: #9C27B0; color: white; }
+        .categoria-dlc { background-color: #ff9800; color: white; }
+        .categoria-puntos { background: linear-gradient(135deg, #ffd700, #ffa500); color: #333; }
+        
+        .sorteo-precio {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: orangered;
+            margin: 8px 0;
+        }
+        
+        .sorteo-original {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 0.85em;
+            margin-left: 8px;
+        }
+        
+        .sorteo-stats {
+            background: #f5f5f5;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: nowrap;
+            gap: 5px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .stat-numero {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: orangered;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.7em;
+        }
+        
+        .registro-sorteo-btn {
+            width: 100%;
+            padding: 10px;
+            background: linear-gradient(45deg, #ff9800, #ff6b6b);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
+            font-size: 0.9em;
+        }
+        
+        .registro-sorteo-btn:hover:not(:disabled) {
+            transform: scale(1.02);
+        }
+        
+        .registro-sorteo-btn.registrado {
+            background: #4CAF50;
+        }
+        
+        .puntos-costo {
+            font-size: 0.75em;
+            margin-left: 5px;
+            opacity: 0.9;
+        }
+
+        .participantes-destacados {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 50px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .participantes-titulo {
+            color: white;
+            margin-top: 0;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .participantes-container {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            min-height: 60px;
+            transition: all 0.5s ease;
+        }
+        
+        .participante-item {
+            background: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 500;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            animation: aparecer 0.5s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .participante-item:hover {
+            transform: scale(1.05);
+            border-color: #ffd700;
+        }
+        
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .participante-item.saliendo {
+            animation: desaparecer 0.5s ease-out forwards;
+        }
+        
+        @keyframes desaparecer {
+            from {
+                opacity: 1;
+                transform: scale(1);
+            }
+            to {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+        }
+        
+        .participante-icono {
+            font-size: 1.2em;
+        }
+        
+        .participante-nombre {
+            font-weight: bold;
+        }
+        
+        .participante-sorteos {
+            background: #f0f0f0;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            color: #666;
+        }
+
+        footer {
+            background-color: rgb(230,230,230);
+            padding: 12px 0;
+            margin-top: 60px;
+        }
+        
+        footer p {
+            margin: 0;
+            padding: 12px;
+            color: rgb(100,100,100);
+            text-align: center;
+        }
+        
+        footer .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+        }
+
+        @media (min-width: 720px) {
+            header .container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            header nav {
+                flex-direction: row;
+                padding-bottom: 0;
+                padding-right: 20px;
+            }
+            
+            #sorteos-hero h1 {
+                font-size: 4em;
+            }
+            
+            #sorteos-hero {
+                margin-top: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <p class="logo">XtremeGaming</p>
+        <nav>
+            <a href="index.html">Inicio</a>
+            <a href="index.html#VideojuegosMas">Videojuegos</a>
+            <a href="tarjetas.html">Tarjetas Regalo</a>
+            <a href="dispositivos.html">Dispositivos</a>
+            <a href="dlc.html">DLC</a>
+            <a href="index.html#caracteristicas">Sobre Nosotros</a>
+            <a href="perfil.html">Perfil</a>
+            <a href="ajustes.html">Ajustes</a>
+            <a href="carrito.html">Carrito</a>
+            <a href="sugerencias.html">Sugerencias</a>
+            <a href="actualizaciones.html">Registro de cambios</a>
+        </nav>
+    </div>
+</header>
+
+<section id="sorteos-hero">
+    <h1>🎲 Sorteos Diarios 🎲</h1>
+    <p>¡5 sorteos diferentes! Participa en cada uno por separado!</p>
+    <p>Los ganadores serán contactados por correo para reclamar el premio, pero si ganas los Puntos Xtreme, entonces, se te otorgaran 1000 Puntos Xtreme al perfil automaticamente.</p>
+</section>
+
+<section id="sorteos-contenido" style="padding: 50px 12px;">
+    <div class="container">
+        
+        <div style="text-align: center;">
+            <div class="puntos-bar">
+                ⭐ Tus Puntos Xtreme: <span class="puntos-valor" id="puntos-disponibles">1,250</span>
+            </div>
+        </div>
+        <center> Obtén Puntos Xtreme haciendo compras! Cuanto más cara la compra, más puntos recibirás! </center>
+        
+        <h2 style="text-align: center; margin: 40px 0 20px;">🎁 Sorteos Activos 🎁</h2>
+        
+        <div class="sorteos-container">
+            <div class="sorteos-fila">
+                
+                <div class="sorteo-card" id="sorteo-videojuego">
+                    <img src="media/mariowonder.png" alt="Videojuego" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Videojuego'">
+                    <div class="sorteo-contenido">
+                        <span class="sorteo-categoria categoria-juego">🎮 VIDEOJUEGO</span>
+                        <h3 class="sorteo-titulo">Super Mario Bros. Wonder</h3>
+                        <div class="sorteo-precio">
+                            $59.99
+                        </div>
+                        
+                        <div class="sorteo-stats">
+                            <div class="stat-item">
+                                <div class="stat-numero" id="tiempo-videojuego">24:00:00</div>
+                                <div class="stat-label">Tiempo</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero" id="participantes-videojuego">87</div>
+                                <div class="stat-label">Participantes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero">1</div>
+                                <div class="stat-label">Ganador</div>
+                            </div>
+                        </div>
+                        
+                        <button class="registro-sorteo-btn" id="btn-videojuego" onclick="registrarseSorteo('videojuego')">
+                            🎟️ REGISTRARSE (50 pts)
+                        </button>
+                        <p id="mensaje-videojuego" style="font-size: 0.8em; margin-top: 5px;"></p>
+                    </div>
+                </div>
+                
+                <div class="sorteo-card" id="sorteo-tarjeta">
+                    <img src="media/eshop50.png" alt="Tarjeta" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Tarjeta+$50'">
+                    <div class="sorteo-contenido">
+                        <span class="sorteo-categoria categoria-tarjeta">💳 TARJETA</span>
+                        <h3 class="sorteo-titulo">Nintendo eShop $50</h3>
+                        <div class="sorteo-precio">
+                            $50.00
+                        </div>
+                        
+                        <div class="sorteo-stats">
+                            <div class="stat-item">
+                                <div class="stat-numero" id="tiempo-tarjeta">24:00:00</div>
+                                <div class="stat-label">Tiempo</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero" id="participantes-tarjeta">124</div>
+                                <div class="stat-label">Participantes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero">1</div>
+                                <div class="stat-label">Ganador</div>
+                            </div>
+                        </div>
+                        
+                        <button class="registro-sorteo-btn" id="btn-tarjeta" onclick="registrarseSorteo('tarjeta')">
+                            🎟️ REGISTRARSE (50 pts)
+                        </button>
+                        <p id="mensaje-tarjeta" style="font-size: 0.8em; margin-top: 5px;"></p>
+                    </div>
+                </div>
+                
+                <div class="sorteo-card" id="sorteo-dispositivo">
+                    <img src="media/auricularesphoenix.jpg" alt="Auriculares" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Auriculares'">
+                    <div class="sorteo-contenido">
+                        <span class="sorteo-categoria categoria-dispositivo">🎧 DISPOSITIVO</span>
+                        <h3 class="sorteo-titulo">Phoenix X-IO</h3>
+                        <div class="sorteo-precio">
+                            $89.99 <span class="sorteo-original">$129.99</span>
+                        </div>
+                        
+                        <div class="sorteo-stats">
+                            <div class="stat-item">
+                                <div class="stat-numero" id="tiempo-dispositivo">24:00:00</div>
+                                <div class="stat-label">Tiempo</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero" id="participantes-dispositivo">56</div>
+                                <div class="stat-label">Participantes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero">1</div>
+                                <div class="stat-label">Ganador</div>
+                            </div>
+                        </div>
+                        
+                        <button class="registro-sorteo-btn" id="btn-dispositivo" onclick="registrarseSorteo('dispositivo')">
+                            🎟️ REGISTRARSE (50 pts)
+                        </button>
+                        <p id="mensaje-dispositivo" style="font-size: 0.8em; margin-top: 5px;"></p>
+                    </div>
+                </div>
+                
+                <div class="sorteo-card" id="sorteo-dlc">
+                    <img src="media/polar.png" alt="DLC" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Fortnite+DLC'">
+                    <div class="sorteo-contenido">
+                        <span class="sorteo-categoria categoria-dlc">📦 DLC</span>
+                        <h3 class="sorteo-titulo">Fortnite Polar Legends</h3>
+                        <div class="sorteo-precio">
+                            $22.99
+                        </div>
+                        
+                        <div class="sorteo-stats">
+                            <div class="stat-item">
+                                <div class="stat-numero" id="tiempo-dlc">24:00:00</div>
+                                <div class="stat-label">Tiempo</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero" id="participantes-dlc">203</div>
+                                <div class="stat-label">Participantes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero">1</div>
+                                <div class="stat-label">Ganador</div>
+                            </div>
+                        </div>
+                        
+                        <button class="registro-sorteo-btn" id="btn-dlc" onclick="registrarseSorteo('dlc')">
+                            🎟️ REGISTRARSE (50 pts)
+                        </button>
+                        <p id="mensaje-dlc" style="font-size: 0.8em; margin-top: 5px;"></p>
+                    </div>
+                </div>
+                
+                <div class="sorteo-card" id="sorteo-puntos">
+                    <img src="media/estrella.png" alt="1000 Puntos" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=1000+Puntos'">
+                    <div class="sorteo-contenido">
+                        <span class="sorteo-categoria categoria-puntos">⭐ PUNTOS</span>
+                        <h3 class="sorteo-titulo">1000 Puntos Xtreme</h3>
+                        <div class="sorteo-precio">
+                            $10 valor
+                        </div>
+                        
+                        <div class="sorteo-stats">
+                            <div class="stat-item">
+                                <div class="stat-numero" id="tiempo-puntos">24:00:00</div>
+                                <div class="stat-label">Tiempo</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero" id="participantes-puntos">312</div>
+                                <div class="stat-label">Participantes</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-numero">3</div>
+                                <div class="stat-label">Ganadores</div>
+                            </div>
+                        </div>
+                        
+                        <button class="registro-sorteo-btn" id="btn-puntos" onclick="registrarseSorteo('puntos')">
+                            🎟️ REGISTRARSE (50 pts)
+                        </button>
+                        <p id="mensaje-puntos" style="font-size: 0.8em; margin-top: 5px;"></p>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+        <div class="participantes-destacados">
+            <h3 class="participantes-titulo">⭐ Algunos participantes registrados ⭐</h3>
+            <div class="participantes-container" id="participantes-container">
+            </div>
+        </div>
+        
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; XtremeGaming 2026 - Sorteos Diarios</p>
+    </div>
+</footer>
+
+<script>
+    let puntosDisponibles = 1250;
+    const puntosSpan = document.getElementById('puntos-disponibles');
+    
+    const sorteos = {
+        videojuego: { 
+            participantes: 87, 
+            registrado: false,
+            tiempo: 24 * 60 * 60,
+            elementoTiempo: 'tiempo-videojuego',
+            elementoParticipantes: 'participantes-videojuego',
+            elementoBtn: 'btn-videojuego',
+            elementoMensaje: 'mensaje-videojuego'
+        },
+        tarjeta: { 
+            participantes: 124, 
+            registrado: false,
+            tiempo: 24 * 60 * 60,
+            elementoTiempo: 'tiempo-tarjeta',
+            elementoParticipantes: 'participantes-tarjeta',
+            elementoBtn: 'btn-tarjeta',
+            elementoMensaje: 'mensaje-tarjeta'
+        },
+        dispositivo: { 
+            participantes: 56, 
+            registrado: false,
+            tiempo: 24 * 60 * 60,
+            elementoTiempo: 'tiempo-dispositivo',
+            elementoParticipantes: 'participantes-dispositivo',
+            elementoBtn: 'btn-dispositivo',
+            elementoMensaje: 'mensaje-dispositivo'
+        },
+        dlc: { 
+            participantes: 203, 
+            registrado: false,
+            tiempo: 24 * 60 * 60,
+            elementoTiempo: 'tiempo-dlc',
+            elementoParticipantes: 'participantes-dlc',
+            elementoBtn: 'btn-dlc',
+            elementoMensaje: 'mensaje-dlc'
+        },
+        puntos: { 
+            participantes: 312, 
+            registrado: false,
+            tiempo: 24 * 60 * 60,
+            elementoTiempo: 'tiempo-puntos',
+            elementoParticipantes: 'participantes-puntos',
+            elementoBtn: 'btn-puntos',
+            elementoMensaje: 'mensaje-puntos'
+        }
+    };
+    
+    function actualizarPuntos() {
+        if (puntosSpan) {
+            puntosSpan.textContent = puntosDisponibles.toLocaleString();
+            localStorage.setItem('puntosXtreme', puntosDisponibles);
+        }
+    }
+    
+    function actualizarTiempos() {
+        for (let key in sorteos) {
+            const sorteo = sorteos[key];
+            const tiempoSpan = document.getElementById(sorteo.elementoTiempo);
+            
+            if (tiempoSpan && sorteo.tiempo > 0) {
+                sorteo.tiempo--;
+                
+                const horas = Math.floor(sorteo.tiempo / 3600);
+                const minutos = Math.floor((sorteo.tiempo % 3600) / 60);
+                const segundos = sorteo.tiempo % 60;
+                
+                tiempoSpan.textContent = `${horas.toString().padStart(2, '0')}:${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+            } else if (tiempoSpan && sorteo.tiempo <= 0) {
+                tiempoSpan.textContent = "¡TERMINADO!";
+                const btn = document.getElementById(sorteo.elementoBtn);
+                if (btn) {
+                    btn.disabled = true;
+                    btn.textContent = "SORTEO FINALIZADO";
+                }
+            }
+        }
+    }
+    
+    window.registrarseSorteo = function(sorteoId) {
+        console.log("Registrando en sorteo:", sorteoId);
+        
+        const sorteo = sorteos[sorteoId];
+        
+        if (!sorteo) {
+            alert("Error: Sorteo no encontrado");
+            return;
+        }
+        
+        if (sorteo.registrado) {
+            document.getElementById(sorteo.elementoMensaje).textContent = "❌ Ya estás registrado";
+            document.getElementById(sorteo.elementoMensaje).style.color = "red";
+            return;
+        }
+        
+        if (puntosDisponibles < 50) {
+            document.getElementById(sorteo.elementoMensaje).textContent = "❌ No tienes suficientes puntos (necesitas 50)";
+            document.getElementById(sorteo.elementoMensaje).style.color = "red";
+            return;
+        }
+        
+        puntosDisponibles -= 50;
+        actualizarPuntos();
+        
+        sorteo.participantes++;
+        document.getElementById(sorteo.elementoParticipantes).textContent = sorteo.participantes;
+        
+        sorteo.registrado = true;
+        const btn = document.getElementById(sorteo.elementoBtn);
+        btn.disabled = true;
+        btn.classList.add('registrado');
+        btn.textContent = "✅ REGISTRADO";
+        
+        const mensaje = document.getElementById(sorteo.elementoMensaje);
+        mensaje.textContent = "✅ ¡Registrado! Buena suerte 🎉";
+        mensaje.style.color = "green";
+        
+        let registros = JSON.parse(localStorage.getItem('sorteosRegistrados')) || {};
+        registros[sorteoId] = true;
+        localStorage.setItem('sorteosRegistrados', JSON.stringify(registros));
+        localStorage.setItem('puntosXtreme', puntosDisponibles);
+        
+        console.log("Registro exitoso en:", sorteoId);
+    }
+    
+    function comprobarRegistros() {
+        const puntosGuardados = localStorage.getItem('puntosXtreme');
+        if (puntosGuardados) {
+            puntosDisponibles = parseInt(puntosGuardados);
+            actualizarPuntos();
+        }
+        
+        const registrosGuardados = JSON.parse(localStorage.getItem('sorteosRegistrados')) || {};
+        
+        for (let key in sorteos) {
+            if (registrosGuardados[key]) {
+                const sorteo = sorteos[key];
+                sorteo.registrado = true;
+                
+                const btn = document.getElementById(sorteo.elementoBtn);
+                if (btn) {
+                    btn.disabled = true;
+                    btn.classList.add('registrado');
+                    btn.textContent = "✅ REGISTRADO";
+                }
+                
+                const mensaje = document.getElementById(sorteo.elementoMensaje);
+                if (mensaje) {
+                    mensaje.textContent = "✅ ¡Registrado! Buena suerte 🎉";
+                    mensaje.style.color = "green";
+                }
+            }
+        }
+    }
+    
+    const nombresParticipantes = [
+        "Gamer123", "XtremeFan", "GameLover", "BattlefieldPro", 
+        "FortniteKing", "NintendoSwitch", "PlayStationGuy", "XboxPlayer",
+        "Cyberpunk'd", "DLCCollector", "AuricularesPro", "TarjetaMaster",
+        "LegendGamer", "MarioFan", "SonicSpeed", "PcGamerMaster",
+        "VR_User", "CloudGamer", "GeForceNOW_User", "IndieLover", "SusAlbert",
+    ];
+    
+    const iconos = ["🎮", "💻", "🕹️", "👾", "🖥️"];
+    
+    function generarParticipanteAleatorio() {
+        const nombre = nombresParticipantes[Math.floor(Math.random() * nombresParticipantes.length)];
+        const icono = iconos[Math.floor(Math.random() * iconos.length)];
+        const numSorteos = Math.floor(Math.random() * 5) + 1;
+        
+        return {
+            nombre: nombre,
+            icono: icono,
+            sorteos: numSorteos
+        };
+    }
+    
+    function crearElementoParticipante(participante) {
+        const div = document.createElement('div');
+        div.className = 'participante-item';
+        div.innerHTML = `
+            <span class="participante-icono">${participante.icono}</span>
+            <span class="participante-nombre">${participante.nombre}</span>
+            <span class="participante-sorteos">${participante.sorteos} ${participante.sorteos === 1 ? 'sorteo' : 'sorteos'}</span>
+        `;
+        return div;
+    }
+    
+    function actualizarParticipantesDestacados() {
+        const container = document.getElementById('participantes-container');
+        if (!container) return;
+        
+        const participantesActuales = container.children;
+        for (let i = 0; i < participantesActuales.length; i++) {
+            participantesActuales[i].classList.add('saliendo');
+        }
+        
+        setTimeout(() => {
+            container.innerHTML = '';
+            
+            const numParticipantes = Math.floor(Math.random() * 3) + 4;
+            
+            for (let i = 0; i < numParticipantes; i++) {
+                const participante = generarParticipanteAleatorio();
+                const elemento = crearElementoParticipante(participante);
+                container.appendChild(elemento);
+            }
+        }, 400);
+    }
+    
+    function inicializarParticipantes() {
+        const container = document.getElementById('participantes-container');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        const participantesIniciales = [
+            { nombre: "Gamer123", icono: "🎮", sorteos: 5 },
+            { nombre: "XtremeFan", icono: "🕹️", sorteos: 4 },
+            { nombre: "GameLover", icono: "👾", sorteos: 3 },
+            { nombre: "BattlefieldPro", icono: "🖥️", sorteos: 2 }
+        ];
+        
+        participantesIniciales.forEach(p => {
+            container.appendChild(crearElementoParticipante(p));
+        });
+    }
+    
+    setInterval(actualizarTiempos, 1000);
+    setInterval(actualizarParticipantesDestacados, 3000);
+    
+    window.addEventListener('load', function() {
+        comprobarRegistros();
+        actualizarTiempos();
+        actualizarPuntos();
+        inicializarParticipantes();
+    });
+</script>
+
+</body>
+</html>

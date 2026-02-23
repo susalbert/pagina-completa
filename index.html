@@ -102,6 +102,8 @@
             transition: all 0.3s ease;
             font-size: 0.95em;
             font-family: 'Fredoka', sans-serif !important;
+            position: relative;
+            z-index: 1;
         }
         
         .filtro-btn:hover {
@@ -161,6 +163,20 @@
             margin: 15px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             width: 300px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .carta button {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .carta button:disabled,
+        .carta button[disabled] {
+            z-index: 1 !important;
+            opacity: 0.5;
+            cursor: not-allowed;
         }
         
         .programas {
@@ -184,6 +200,8 @@
             cursor: pointer;
             transition: all 0.2s;
             width: 110px;
+            position: relative;
+            z-index: 1;
         }
         
         .edicion-nombre {
@@ -240,11 +258,22 @@
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
         }
         
         .sorteo-btn:hover {
             transform: scale(1.05);
             background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+        }
+        
+        header {
+            background-color: rgb(245,245,245);
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 1000 !important;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -264,7 +293,7 @@
         <a href="ajustes.html">Ajustes</a>
         <a href="carrito.html">Carrito</a>
         <a href="sugerencias.html">Sugerencias</a>
-        <a href="actualizaciones.html">Actualizaciones</a>
+        <a href="actualizaciones.html">Registro de Cambios</a>
 </nav>
     </div>  
 </header>
@@ -317,7 +346,7 @@
         <div class="programas">
 
             <div class="carta game-card" data-name="Super Mario Odyssey" data-genre="Platformer 3D" data-plataformas="nintendo,vr">
-                <h3>Super Mario Odyssey 
+                <h3>Super Mario Odyssey (Fisico)
                     <span class="plataforma-badge nintendo-badge">Nintendo</span>
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
@@ -326,7 +355,7 @@
             </div>
 
             <div class="carta game-card" data-name="Undertale" data-genre="RPG" data-plataformas="pc,nintendo,playstation,xbox,cloud">
-                <h3>Undertale 
+                <h3>Undertale (Digital)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
@@ -338,7 +367,7 @@
             </div>
 
             <div class="carta game-card" id="battlefield-card" data-name="Battlefield 6" data-genre="FPS" data-plataformas="pc,playstation,xbox,geforce">
-                <h3>Battlefield 6 
+                <h3>Battlefield 6 (Digital)
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
                     <span class="plataforma-badge pc-badge">PC</span>
@@ -362,7 +391,7 @@
             </div>
 
             <div class="carta game-card" id="zelda-card" data-name="The Legend of Zelda: Tears of the Kingdom" data-genre="Aventura" data-plataformas="nintendo">
-                <h3>The Legend of Zelda: Tears of the Kingdom 
+                <h3>The Legend of Zelda: TotK (Fisico) 
                     <span class="plataforma-badge nintendo-badge">Nintendo</span>
                 </h3>
                 <p>Aventura - Elige tu edición</p>
@@ -383,7 +412,7 @@
             </div>
 
             <div class="carta game-card" data-name="Hollow Knight: Silksong" data-genre="Platformer 2D" data-plataformas="pc,nintendo,playstation,xbox,cloud">
-                <h3>Hollow Knight: Silksong 
+                <h3>Hollow Knight: Silksong (Fisico)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
@@ -395,7 +424,7 @@
             </div>
 
             <div class="carta game-card" data-name="Hytale" data-genre="Sandbox" data-plataformas="pc,vr">
-                <h3>Hytale 
+                <h3>Hytale (Digital)
                     <span class="plataforma-badge pc-badge">PC</span>
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
@@ -406,8 +435,8 @@
         </div>
 
         <div class="sorteo-container">
-            <h2 style="color: #e65100; margin-bottom: 20px;">🎲 ¡Sorteo Diario! 🎲</h2>
-            <p style="font-size: 1.2em; margin-bottom: 20px; color: #333;">Participa cada día y gana fantásticos premios</p>
+            <h2 style="color: #e65100; margin-bottom: 20px;">🎲 ¡Sorteos Diarios! 🎲</h2>
+            <p style="font-size: 1.2em; margin-bottom: 20px; color: #333;">Participa cada día y gana fantásticos premios!</p>
             <button class="sorteo-btn" onclick="location.href='sorteos.html'">
                 🎁 ¡PARTICIPAR AHORA! 🎁
             </button>
