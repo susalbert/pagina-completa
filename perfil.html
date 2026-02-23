@@ -178,6 +178,124 @@
             color: #666;
         }
 
+        /* SECCIÓN DE CONFIGURACIÓN DE CUENTA */
+        .configuracion-card {
+            background-color: #f5f5f5;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            border-radius: 10px;
+            border-left: 4px solid #4CAF50;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .configuracion-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        
+        .config-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: white;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            min-width: 160px;
+        }
+        
+        .config-btn:hover {
+            border-color: #4CAF50;
+            transform: translateY(-2px);
+        }
+        
+        .config-btn.pass-btn:hover { border-color: #ff9800; }
+        .config-btn.email-btn:hover { border-color: #2196F3; }
+        .config-btn.name-btn:hover { border-color: #9C27B0; }
+        
+        .config-icon {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .config-text {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .config-desc {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+        
+        .modal h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+        
+        .modal-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        .modal-btn.cancel {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        
+        .modal-btn.confirm {
+            background-color: #4CAF50;
+            color: white;
+        }
+
         .juegos-grid {
             display: flex;
             justify-content: center;
@@ -305,6 +423,16 @@
             .fecha {
                 margin-left: 0;
             }
+            
+            .configuracion-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .config-btn {
+                width: 100%;
+                max-width: 250px;
+            }
         }
         
         body, h1, h2, h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li, ul, ol, div {
@@ -342,8 +470,8 @@
     <div class="container">
         <div class="perfil-card">
             <div class="avatar">E</div>
-            <h2>Ejemplo</h2>
-            <p>ejemplo@email.com</p>
+            <h2 id="nombre-usuario">Ejemplo</h2>
+            <p id="email-usuario">ejemplo@email.com</p>
             <p>Miembro desde: Enero 2023</p>
             
             <div class="estadisticas">
@@ -362,6 +490,68 @@
             </div>
         </div>
         
+        <div class="configuracion-card">
+            <h2 style="text-align: center; margin-top: 0;">Configuración de Cuenta</h2>
+            
+            <div class="configuracion-grid">
+                <div class="config-btn pass-btn" onclick="abrirModal('pass')">
+                    <span class="config-icon">🔒</span>
+                    <span class="config-text">Cambiar Contraseña</span>
+                    <span class="config-desc">Recibirás un email de verificación</span>
+                </div>
+                
+                <div class="config-btn email-btn" onclick="abrirModal('email')">
+                    <span class="config-icon">📧</span>
+                    <span class="config-text">Cambiar Email</span>
+                    <span class="config-desc">Introduce tu nuevo email</span>
+                </div>
+                
+                <div class="config-btn name-btn" onclick="abrirModal('name')">
+                    <span class="config-icon">👤</span>
+                    <span class="config-text">Cambiar Nombre</span>
+                    <span class="config-desc">Recibirás un email de verificación</span>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-pass" class="modal-overlay">
+            <div class="modal">
+                <h3>Cambiar Contraseña</h3>
+                <p>Se enviará un email de verificación a <strong id="email-actual-pass">ejemplo@email.com</strong></p>
+                <p style="font-size: 0.9em; color: #666;">Haz clic en el enlace del email para continuar con el cambio de contraseña.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="cerrarModal('pass')">Cancelar</button>
+                    <button class="modal-btn confirm" onclick="enviarVerificacion('pass')">Enviar verificación</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-email" class="modal-overlay">
+            <div class="modal">
+                <h3>Cambiar Email</h3>
+                <p>Email actual: <strong id="email-actual-email">ejemplo@email.com</strong></p>
+                <input type="email" id="nuevo-email" placeholder="Nuevo email">
+                <p style="font-size: 0.9em; color: #666;">Te enviaremos un código de verificación a este nuevo email.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="cerrarModal('email')">Cancelar</button>
+                    <button class="modal-btn confirm" onclick="enviarVerificacion('email')">Enviar verificación</button>
+                </div>
+            </div>
+        </div>
+        
+        <div id="modal-name" class="modal-overlay">
+            <div class="modal">
+                <h3>Cambiar Nombre</h3>
+                <p>Nombre actual: <strong id="nombre-actual">Ejemplo</strong></p>
+                <p>Se enviará un email de verificación a <strong id="email-actual-name">ejemplo@email.com</strong></p>
+                <p style="font-size: 0.9em; color: #666;">Haz clic en el enlace del email para confirmar el cambio de nombre.</p>
+                <div class="modal-buttons">
+                    <button class="modal-btn cancel" onclick="cerrarModal('name')">Cancelar</button>
+                    <button class="modal-btn confirm" onclick="enviarVerificacion('name')">Enviar verificación</button>
+                </div>
+            </div>
+        </div>
+        
         <h2>Mis Juegos</h2>
         <div class="juegos-grid">
             <div class="juego-card">
@@ -375,7 +565,7 @@
                 <h3>Battlefield 6 - Phantom Edition</h3>
                 <p>FPS</p>
                 <p>Comprado: 10/02/2024</p>
-                <button onclick="alert('Iniciando juego: Battlefield 6: Phantom Edition')">Jugar</button>
+                <button onclick="alert('Iniciando juego: Battlefield 6 - Phantom Edition')">Jugar</button>
             </div>
             
             <div class="juego-card">
@@ -412,6 +602,7 @@
                 <span class="precio">$89.99</span>
             </div>
         </div>
+    </div>
 </section>
 
 <footer>
@@ -419,6 +610,58 @@
         <p>&copy; XtremeGaming 2026 - Mi Perfil</p>
     </div>
 </footer>
+
+<script>
+    function abrirModal(tipo) {
+        document.getElementById(`modal-${tipo}`).style.display = 'flex';
+    }
+    
+    function cerrarModal(tipo) {
+        document.getElementById(`modal-${tipo}`).style.display = 'none';
+        if (tipo === 'email') {
+            document.getElementById('nuevo-email').value = '';
+        }
+    }
+    
+    function enviarVerificacion(tipo) {
+        const emailActual = 'ejemplo@email.com';
+        const nombreActual = 'Ejemplo';
+        
+        if (tipo === 'email') {
+            const nuevoEmail = document.getElementById('nuevo-email').value.trim();
+            
+            if (!nuevoEmail) {
+                alert('❌ Por favor, ingresa un nuevo email');
+                return;
+            }
+            
+            if (!nuevoEmail.includes('@') || !nuevoEmail.includes('.')) {
+                alert('❌ Por favor, ingresa un email válido');
+                return;
+            }
+            
+            alert(`✅ Se ha enviado un código de verificación a ${nuevoEmail}\nPor favor, revisa tu bandeja de entrada.`);
+            document.getElementById('email-usuario').textContent = nuevoEmail;
+            
+        } else if (tipo === 'pass') {
+            alert(`✅ Se ha enviado un email de verificación a ${emailActual}\nHaz clic en el enlace para cambiar tu contraseña.`);
+            
+        } else if (tipo === 'name') {
+            alert(`✅ Se ha enviado un email de verificación a ${emailActual}\nHaz clic en el enlace para confirmar el cambio de nombre.`);
+        }
+        
+        cerrarModal(tipo);
+    }
+    
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal-overlay')) {
+            event.target.style.display = 'none';
+            if (event.target.id === 'modal-email') {
+                document.getElementById('nuevo-email').value = '';
+            }
+        }
+    };
+</script>
 
 </body>
 </html>
