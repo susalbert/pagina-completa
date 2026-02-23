@@ -22,6 +22,10 @@
             color: #333;
         }
         
+        body.modal-abierto {
+            overflow: hidden;
+        }
+        
         h1 { font-size: 3.5em; }
         h2 { font-size: 2.7em; }
         h3 { font-size: 2em; }
@@ -254,6 +258,8 @@
             max-width: 400px;
             width: 90%;
             box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            max-height: 90vh;
+            overflow-y: auto;
         }
         
         .modal h3 {
@@ -613,10 +619,12 @@
 <script>
     function abrirModal(tipo) {
         document.getElementById(`modal-${tipo}`).style.display = 'flex';
+        document.body.classList.add('modal-abierto');
     }
     
     function cerrarModal(tipo) {
         document.getElementById(`modal-${tipo}`).style.display = 'none';
+        document.body.classList.remove('modal-abierto');
         if (tipo === 'email') {
             document.getElementById('nuevo-email').value = '';
         }
@@ -641,6 +649,9 @@
             
             alert(`✅ Se ha enviado un código de verificación a ${nuevoEmail}\nPor favor, revisa tu bandeja de entrada.`);
             document.getElementById('email-usuario').textContent = nuevoEmail;
+            document.getElementById('email-actual-email').textContent = nuevoEmail;
+            document.getElementById('email-actual-pass').textContent = nuevoEmail;
+            document.getElementById('email-actual-name').textContent = nuevoEmail;
             
         } else if (tipo === 'pass') {
             alert(`✅ Se ha enviado un email de verificación a ${emailActual}\nHaz clic en el enlace para cambiar tu contraseña.`);
@@ -655,6 +666,7 @@
     window.onclick = function(event) {
         if (event.target.classList.contains('modal-overlay')) {
             event.target.style.display = 'none';
+            document.body.classList.remove('modal-abierto');
             if (event.target.id === 'modal-email') {
                 document.getElementById('nuevo-email').value = '';
             }
