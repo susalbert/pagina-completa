@@ -219,6 +219,33 @@
         .edicion-badge.selected .edicion-precio {
             background-color: #ffe0d1;
         }
+
+        .sorteo-container {
+            text-align: center;
+            margin: 50px 0 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-radius: 15px;
+            border: 2px solid #ff9800;
+        }
+        
+        .sorteo-btn {
+            font-size: 1.8em;
+            padding: 20px 50px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e53);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .sorteo-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(45deg, #ff8e53, #ff6b6b);
+        }
     </style>
 </head>
 <body>
@@ -376,6 +403,14 @@
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>            
             </div>
 
+        </div>
+
+        <div class="sorteo-container">
+            <h2 style="color: #e65100; margin-bottom: 20px;">🎲 ¡Sorteo Diario! 🎲</h2>
+            <p style="font-size: 1.2em; margin-bottom: 20px; color: #333;">Participa cada día y gana fantásticos premios</p>
+            <button class="sorteo-btn" onclick="location.href='sorteos.html'">
+                🎁 ¡PARTICIPAR AHORA! 🎁
+            </button>
         </div>
     </div>
 </section>

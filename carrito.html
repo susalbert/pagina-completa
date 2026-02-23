@@ -187,7 +187,7 @@
                     <span class="puntos-valor" id="puntos-disponibles">1,250</span>
                 </div>
                 <div class="puntos-input">
-                    <input type="number" id="puntos" placeholder="Ej: 100, 200, 300... (máx 1000)" min="0" max="1000" step="100">
+                    <input type="text" id="puntos" placeholder="Ej: 100, 200, 300... (máx 1000)" maxlength="4" onkeypress="return soloNumeros(event)" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
                     <button id="aplicar-puntos" class="puntos-btn">Canjear</button>
                 </div>
                 <div id="puntos-mensaje" class="puntos-mensaje"></div>
@@ -216,7 +216,7 @@
                     <span id="descuento-puntos">-$0.00</span>
                 </div>
                 <div class="resumen-linea" id="linea-descuento-cupon" style="display:none;">
-                    <span>Descuento cupón (10%):</span>
+                    <span>Descuento cupón (<span id="cupon-porcentaje">10</span>%):</span>
                     <span id="descuento-cupon">-$0.00</span>
                 </div>
                 <div class="resumen-linea">
@@ -248,9 +248,25 @@
 </footer>
 
 <script>
+    function soloNumeros(e) {
+        const charCode = (e.which) ? e.which : e.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
     let cuponUsado = false;
     let descuentoPorcentaje = 0;
-    const codigosValidos = ["PRUEBA1", "PRUEBA2", "PRUEBA3"];
+    let codigoAplicado = "";
+    
+    const codigosValidos = {
+        "PRUEBA1": 50,
+        "PRUEBA2": 25,
+        "PRUEBA3": 10
+    };
+    
+    const codigosCaducados = ["PRUEBA4"];
     
     let puntosDisponibles = 1250;
     let puntosCanjeados = 0;
@@ -303,6 +319,7 @@
         if (descuentoCuponMonto > 0) {
             document.getElementById('linea-descuento-cupon').style.display = "flex";
             document.getElementById('descuento-cupon').textContent = "-$" + descuentoCuponMonto.toFixed(2);
+            document.getElementById('cupon-porcentaje').textContent = descuentoPorcentaje;
         } else {
             document.getElementById('linea-descuento-cupon').style.display = "none";
         }
@@ -346,24 +363,30 @@
             return;
         }
         
-        if (!codigosValidos.includes(cupon)) {
-            mensaje.textContent = "Código no válido";
-            mensaje.style.color = "red";
+        if (codigosCaducados.includes(cupon)) {
+            mensaje.textContent = "❌ Este código ha caducado y ya no está disponible";
+            mensaje.style.color = "orange";
             return;
         }
         
-        descuentoPorcentaje = 10;
-        cuponUsado = true;
-        
-        calcularTotal();
-        
-        document.getElementById('cupon').disabled = true;
-        this.disabled = true;
-        this.textContent = "Aplicado";
-        this.style.backgroundColor = "#666";
-        
-        mensaje.textContent = "¡Cupón aplicado! 10% de descuento";
-        mensaje.style.color = "green";
+        if (codigosValidos.hasOwnProperty(cupon)) {
+            descuentoPorcentaje = codigosValidos[cupon];
+            cuponUsado = true;
+            codigoAplicado = cupon;
+            
+            calcularTotal();
+            
+            document.getElementById('cupon').disabled = true;
+            this.disabled = true;
+            this.textContent = "Aplicado";
+            this.style.backgroundColor = "#666";
+            
+            mensaje.textContent = `¡Cupón aplicado! ${descuentoPorcentaje}% de descuento`;
+            mensaje.style.color = "green";
+        } else {
+            mensaje.textContent = "Código no válido";
+            mensaje.style.color = "red";
+        }
     };
     
     document.getElementById('aplicar-puntos').onclick = function() {
