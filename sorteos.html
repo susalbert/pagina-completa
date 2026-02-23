@@ -479,7 +479,7 @@
                     <img src="media/mariowonder.png" alt="Videojuego" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Videojuego'">
                     <div class="sorteo-contenido">
                         <span class="sorteo-categoria categoria-juego">🎮 VIDEOJUEGO</span>
-                        <h3 class="sorteo-titulo">Super Mario Bros. Wonder</h3>
+                        <h3 class="sorteo-titulo">Super Mario Bros. Wonder (Fisico)</h3>
                         <div class="sorteo-precio">
                             $59.99
                         </div>
@@ -510,7 +510,7 @@
                     <img src="media/eshop50.png" alt="Tarjeta" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Tarjeta+$50'">
                     <div class="sorteo-contenido">
                         <span class="sorteo-categoria categoria-tarjeta">💳 TARJETA</span>
-                        <h3 class="sorteo-titulo">Nintendo eShop $50</h3>
+                        <h3 class="sorteo-titulo">Tarjeta Regalo Nintendo eShop $50 (Codigo Digital, Global)</h3>
                         <div class="sorteo-precio">
                             $50.00
                         </div>
@@ -541,7 +541,7 @@
                     <img src="media/auricularesphoenix.jpg" alt="Auriculares" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Auriculares'">
                     <div class="sorteo-contenido">
                         <span class="sorteo-categoria categoria-dispositivo">🎧 DISPOSITIVO</span>
-                        <h3 class="sorteo-titulo">Phoenix X-IO</h3>
+                        <h3 class="sorteo-titulo">Auriculares Gaming Phoenix X-IO (Fisico)</h3>
                         <div class="sorteo-precio">
                             $89.99 <span class="sorteo-original">$129.99</span>
                         </div>
@@ -572,7 +572,7 @@
                     <img src="media/polar.png" alt="DLC" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=Fortnite+DLC'">
                     <div class="sorteo-contenido">
                         <span class="sorteo-categoria categoria-dlc">📦 DLC</span>
-                        <h3 class="sorteo-titulo">Fortnite Polar Legends</h3>
+                        <h3 class="sorteo-titulo">Fortnite - Polar Legends Pack (Codigo Digital, Global)</h3>
                         <div class="sorteo-precio">
                             $22.99
                         </div>
@@ -603,7 +603,7 @@
                     <img src="media/estrella.png" alt="1000 Puntos" class="sorteo-imagen" onerror="this.src='https://via.placeholder.com/300x180?text=1000+Puntos'">
                     <div class="sorteo-contenido">
                         <span class="sorteo-categoria categoria-puntos">⭐ PUNTOS</span>
-                        <h3 class="sorteo-titulo">1000 Puntos Xtreme</h3>
+                        <h3 class="sorteo-titulo">1000 Puntos Xtreme (Añadidos automaticamente a tu perfil)</h3>
                         <div class="sorteo-precio">
                             $10 de saldo
                         </div>
@@ -766,7 +766,7 @@
         btn.textContent = "✅ REGISTRADO";
         
         const mensaje = document.getElementById(sorteo.elementoMensaje);
-        mensaje.textContent = "✅ ¡Registrado! Buena suerte 🎉";
+        mensaje.textContent = "✅ ¡Registrado! Buena suerte! 🎉";
         mensaje.style.color = "green";
         
         let registros = JSON.parse(localStorage.getItem('sorteosRegistrados')) || {};
@@ -800,7 +800,7 @@
                 
                 const mensaje = document.getElementById(sorteo.elementoMensaje);
                 if (mensaje) {
-                    mensaje.textContent = "✅ ¡Registrado! Buena suerte 🎉";
+                    mensaje.textContent = "✅ ¡Registrado! Buena suerte! 🎉";
                     mensaje.style.color = "green";
                 }
             }
