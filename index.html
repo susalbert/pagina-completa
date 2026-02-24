@@ -275,6 +275,30 @@
             z-index: 1000 !important;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
+
+        /* NUEVO ESTILO PARA PUNTOS XTREME */
+        .puntos-ganados {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            margin-top: 8px;
+            padding: 5px 10px;
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #ff9800;
+            font-weight: bold;
+            border: 1px solid #ff9800;
+        }
+        
+        .puntos-icono {
+            font-size: 1.1em;
+        }
+        
+        .puntos-cantidad {
+            color: #e65100;
+        }
     </style>
 </head>
 <body>
@@ -345,16 +369,23 @@
 
         <div class="programas">
 
-            <div class="carta game-card" data-name="Super Mario Odyssey" data-genre="Platformer 3D" data-plataformas="nintendo,vr">
+            <!-- Super Mario Odyssey -->
+            <div class="carta game-card" data-name="Super Mario Odyssey" data-genre="Platformer 3D" data-plataformas="nintendo,vr" data-precio="59.99">
                 <h3>Super Mario Odyssey (Fisico)
                     <span class="plataforma-badge nintendo-badge">Nintendo</span>
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
                 <p>Platformer 3D</p>
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>
+                <!-- Puntos Xtreme -->
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="carta game-card" data-name="Undertale" data-genre="RPG" data-plataformas="pc,nintendo,playstation,xbox,cloud">
+            <!-- Undertale -->
+            <div class="carta game-card" data-name="Undertale" data-genre="RPG" data-plataformas="pc,nintendo,playstation,xbox,cloud" data-precio="59.99">
                 <h3>Undertale (Codigo Digital, Global)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
@@ -364,8 +395,14 @@
                 </h3>
                 <p>RPG</p>
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>
+                <!-- Puntos Xtreme -->
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>
             </div>
 
+            <!-- Battlefield 6 con ediciones -->
             <div class="carta game-card" id="battlefield-card" data-name="Battlefield 6" data-genre="FPS" data-plataformas="pc,playstation,xbox,geforce">
                 <h3>Battlefield 6 (Codigo Digital, Global)
                     <span class="plataforma-badge playstation-badge">PS</span>
@@ -376,20 +413,26 @@
                 <p>FPS - Elige tu edición</p>
                 
                 <div class="edicion-container">
-                    <div onclick="selectEdition('battlefield', 'standard', this)" class="edicion-badge">
+                    <div onclick="selectEdition('battlefield', 'standard', this)" class="edicion-badge" data-precio="59.99">
                         <span class="edicion-nombre">Standard</span>
                         <span class="edicion-precio">$59.99</span>
                     </div>
                     
-                    <div onclick="selectEdition('battlefield', 'phantom', this)" class="edicion-badge">
+                    <div onclick="selectEdition('battlefield', 'phantom', this)" class="edicion-badge" data-precio="89.99">
                         <span class="edicion-nombre">Phantom ⚡</span>
                         <span class="edicion-precio">$89.99</span>
                     </div>
                 </div>
                 
                 <button id="battlefield-btn" onclick="addToCartWithEdition('battlefield')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
+                <!-- Puntos Xtreme (se actualizarán según edición seleccionada) -->
+                <div class="puntos-ganados" id="puntos-battlefield" style="display: none;">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad" id="puntos-cantidad-battlefield">0</span> Puntos Xtreme</span>
+                </div>
             </div>
 
+            <!-- Zelda con ediciones -->
             <div class="carta game-card" id="zelda-card" data-name="The Legend of Zelda: Tears of the Kingdom" data-genre="Aventura" data-plataformas="nintendo">
                 <h3>The Legend of Zelda: TotK (Fisico) 
                     <span class="plataforma-badge nintendo-badge">Nintendo</span>
@@ -397,21 +440,27 @@
                 <p>Aventura - Elige tu edición</p>
                 
                 <div class="edicion-container">
-                    <div onclick="selectEdition('zelda', 'standard', this)" class="edicion-badge">
+                    <div onclick="selectEdition('zelda', 'standard', this)" class="edicion-badge" data-precio="59.99">
                         <span class="edicion-nombre">Standard</span>
                         <span class="edicion-precio">$59.99</span>
                     </div>
                     
-                    <div onclick="selectEdition('zelda', 'switch2', this)" class="edicion-badge">
+                    <div onclick="selectEdition('zelda', 'switch2', this)" class="edicion-badge" data-precio="79.99">
                         <span class="edicion-nombre">Switch 2 🚀</span>
                         <span class="edicion-precio">$79.99</span>
                     </div>
                 </div>
                 
                 <button id="zelda-btn" onclick="addToCartWithEdition('zelda')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
+                <!-- Puntos Xtreme (se actualizarán según edición seleccionada) -->
+                <div class="puntos-ganados" id="puntos-zelda" style="display: none;">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad" id="puntos-cantidad-zelda">0</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="carta game-card" data-name="Hollow Knight: Silksong" data-genre="Platformer 2D" data-plataformas="pc,nintendo,playstation,xbox,cloud">
+            <!-- Hollow Knight: Silksong -->
+            <div class="carta game-card" data-name="Hollow Knight: Silksong" data-genre="Platformer 2D" data-plataformas="pc,nintendo,playstation,xbox,cloud" data-precio="59.99">
                 <h3>Hollow Knight: Silksong (Fisico)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
@@ -421,15 +470,26 @@
                 </h3>
                 <p>Platformer 2D</p>
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>
+                <!-- Puntos Xtreme -->
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>
             </div>
 
-            <div class="carta game-card" data-name="Hytale" data-genre="Sandbox" data-plataformas="pc,vr">
+            <!-- Hytale -->
+            <div class="carta game-card" data-name="Hytale" data-genre="Sandbox" data-plataformas="pc,vr" data-precio="59.99">
                 <h3>Hytale (Codigo Digital, Global)
                     <span class="plataforma-badge pc-badge">PC</span>
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
                 <p>Sandbox</p>
-                <button onclick="location.href='carrito.html'">Añadir al carro</button>            
+                <button onclick="location.href='carrito.html'">Añadir al carro</button>   
+                <!-- Puntos Xtreme -->
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>         
             </div>
 
         </div>
@@ -485,6 +545,22 @@
         btn.disabled = false;
         btn.style.opacity = '1';
         btn.style.cursor = 'pointer';
+        
+        // Mostrar y actualizar puntos según la edición seleccionada
+        const puntosDiv = document.getElementById('puntos-' + game);
+        const puntosCantidad = document.getElementById('puntos-cantidad-' + game);
+        
+        let precio;
+        if (game === 'battlefield') {
+            precio = edition === 'standard' ? 59.99 : 89.99;
+        } else if (game === 'zelda') {
+            precio = edition === 'standard' ? 59.99 : 79.99;
+        }
+        
+        // Calcular puntos (10% del precio, redondeado)
+        const puntos = Math.round(precio * 10); // 10 puntos por dólar = 10% del precio en puntos
+        puntosCantidad.textContent = puntos;
+        puntosDiv.style.display = 'flex';
     }
 
     function addToCartWithEdition(game) {
