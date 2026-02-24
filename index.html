@@ -282,18 +282,18 @@
             align-items: center;
             justify-content: center;
             gap: 5px;
-            margin-top: 8px;
-            padding: 5px 10px;
+            margin-top: 12px;
+            padding: 4px 8px;
             background: linear-gradient(135deg, #fff3e0, #ffe0b2);
             border-radius: 20px;
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: #ff9800;
             font-weight: bold;
             border: 1px solid #ff9800;
         }
         
         .puntos-icono {
-            font-size: 1.1em;
+            font-size: 0.9em;
         }
         
         .puntos-cantidad {
@@ -371,11 +371,11 @@
 
             <!-- Super Mario Odyssey -->
             <div class="carta game-card" data-name="Super Mario Odyssey" data-genre="Platformer 3D" data-plataformas="nintendo,vr" data-precio="59.99">
-                <h3>Super Mario Odyssey (Fisico)
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Super Mario Odyssey (Fisico)
                     <span class="plataforma-badge nintendo-badge">Nintendo</span>
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
-                <p>Platformer 3D</p>
+                <p style="font-size: 0.95em;">Platformer 3D</p>
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>
                 <!-- Puntos Xtreme -->
                 <div class="puntos-ganados">
@@ -386,14 +386,14 @@
 
             <!-- Undertale -->
             <div class="carta game-card" data-name="Undertale" data-genre="RPG" data-plataformas="pc,nintendo,playstation,xbox,cloud" data-precio="59.99">
-                <h3>Undertale (Codigo Digital, Global)
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Undertale (Codigo Digital, Global)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
                     <span class="plataforma-badge pc-badge">PC</span>
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
-                <p>RPG</p>
+                <p style="font-size: 0.95em;">RPG</p>
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>
                 <!-- Puntos Xtreme -->
                 <div class="puntos-ganados">
@@ -404,13 +404,13 @@
 
             <!-- Battlefield 6 con ediciones -->
             <div class="carta game-card" id="battlefield-card" data-name="Battlefield 6" data-genre="FPS" data-plataformas="pc,playstation,xbox,geforce">
-                <h3>Battlefield 6 (Codigo Digital, Global)
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Battlefield 6 (Codigo Digital, Global)
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
                     <span class="plataforma-badge pc-badge">PC</span>
                     <span class="plataforma-badge geforce-badge">GeForce</span>
                 </h3>
-                <p>FPS - Elige tu edición</p>
+                <p style="font-size: 0.95em;">FPS - Elige tu edición</p>
                 
                 <div class="edicion-container">
                     <div onclick="selectEdition('battlefield', 'standard', this)" class="edicion-badge" data-precio="59.99">
@@ -425,7 +425,7 @@
                 </div>
                 
                 <button id="battlefield-btn" onclick="addToCartWithEdition('battlefield')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
-                <!-- Puntos Xtreme con mensaje cuando no hay selección -->
+                <!-- Puntos Xtreme más pequeños y con margen superior -->
                 <div class="puntos-ganados" id="puntos-battlefield">
                     <span class="puntos-icono">⭐</span>
                     <span id="puntos-texto-battlefield">Selecciona edición para ver Puntos Xtreme</span>
@@ -434,10 +434,10 @@
 
             <!-- Zelda con ediciones -->
             <div class="carta game-card" id="zelda-card" data-name="The Legend of Zelda: Tears of the Kingdom" data-genre="Aventura" data-plataformas="nintendo">
-                <h3>The Legend of Zelda: TotK (Fisico) 
+                <h3 style="font-size: 1.1em; line-height: 1.3;">The Legend of Zelda: TotK (Fisico) 
                     <span class="plataforma-badge nintendo-badge">Nintendo</span>
                 </h3>
-                <p>Aventura - Elige tu edición</p>
+                <p style="font-size: 0.95em;">Aventura - Elige tu edición</p>
                 
                 <div class="edicion-container">
                     <div onclick="selectEdition('zelda', 'standard', this)" class="edicion-badge" data-precio="59.99">
@@ -452,7 +452,7 @@
                 </div>
                 
                 <button id="zelda-btn" onclick="addToCartWithEdition('zelda')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
-                <!-- Puntos Xtreme con mensaje cuando no hay selección -->
+                <!-- Puntos Xtreme más pequeños y con margen superior -->
                 <div class="puntos-ganados" id="puntos-zelda">
                     <span class="puntos-icono">⭐</span>
                     <span id="puntos-texto-zelda">Selecciona edición para ver Puntos Xtreme</span>
@@ -461,14 +461,14 @@
 
             <!-- Hollow Knight: Silksong -->
             <div class="carta game-card" data-name="Hollow Knight: Silksong" data-genre="Platformer 2D" data-plataformas="pc,nintendo,playstation,xbox,cloud" data-precio="59.99">
-                <h3>Hollow Knight: Silksong (Fisico)
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Hollow Knight: Silksong (Fisico)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
                     <span class="plataforma-badge pc-badge">PC</span>
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
-                <p>Platformer 2D</p>
+                <p style="font-size: 0.95em;">Platformer 2D</p>
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>
                 <!-- Puntos Xtreme -->
                 <div class="puntos-ganados">
@@ -479,11 +479,11 @@
 
             <!-- Hytale -->
             <div class="carta game-card" data-name="Hytale" data-genre="Sandbox" data-plataformas="pc,vr" data-precio="59.99">
-                <h3>Hytale (Codigo Digital, Global)
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Hytale (Codigo Digital, Global)
                     <span class="plataforma-badge pc-badge">PC</span>
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
-                <p>Sandbox</p>
+                <p style="font-size: 0.95em;">Sandbox</p>
                 <button onclick="location.href='carrito.html'">Añadir al carro</button>   
                 <!-- Puntos Xtreme -->
                 <div class="puntos-ganados">
