@@ -276,7 +276,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
-        /* NUEVO ESTILO PARA PUNTOS XTREME */
+        /* ESTILO PARA PUNTOS XTREME */
         .puntos-ganados {
             display: flex;
             align-items: center;
@@ -425,10 +425,10 @@
                 </div>
                 
                 <button id="battlefield-btn" onclick="addToCartWithEdition('battlefield')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
-                <!-- Puntos Xtreme (se actualizarán según edición seleccionada) -->
-                <div class="puntos-ganados" id="puntos-battlefield" style="display: none;">
+                <!-- Puntos Xtreme con mensaje cuando no hay selección -->
+                <div class="puntos-ganados" id="puntos-battlefield">
                     <span class="puntos-icono">⭐</span>
-                    <span>Ganas <span class="puntos-cantidad" id="puntos-cantidad-battlefield">0</span> Puntos Xtreme</span>
+                    <span id="puntos-texto-battlefield">Selecciona edición para ver Puntos Xtreme</span>
                 </div>
             </div>
 
@@ -452,10 +452,10 @@
                 </div>
                 
                 <button id="zelda-btn" onclick="addToCartWithEdition('zelda')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
-                <!-- Puntos Xtreme (se actualizarán según edición seleccionada) -->
-                <div class="puntos-ganados" id="puntos-zelda" style="display: none;">
+                <!-- Puntos Xtreme con mensaje cuando no hay selección -->
+                <div class="puntos-ganados" id="puntos-zelda">
                     <span class="puntos-icono">⭐</span>
-                    <span>Ganas <span class="puntos-cantidad" id="puntos-cantidad-zelda">0</span> Puntos Xtreme</span>
+                    <span id="puntos-texto-zelda">Selecciona edición para ver Puntos Xtreme</span>
                 </div>
             </div>
 
@@ -546,11 +546,10 @@
         btn.style.opacity = '1';
         btn.style.cursor = 'pointer';
         
-        // Mostrar y actualizar puntos según la edición seleccionada
-        const puntosDiv = document.getElementById('puntos-' + game);
-        const puntosCantidad = document.getElementById('puntos-cantidad-' + game);
+        // Actualizar puntos según la edición seleccionada
+        const puntosTexto = document.getElementById('puntos-texto-' + game);
         
-        let precio;
+        let precio, puntos;
         if (game === 'battlefield') {
             precio = edition === 'standard' ? 59.99 : 89.99;
         } else if (game === 'zelda') {
@@ -558,9 +557,8 @@
         }
         
         // Calcular puntos (10% del precio, redondeado)
-        const puntos = Math.round(precio * 10); // 10 puntos por dólar = 10% del precio en puntos
-        puntosCantidad.textContent = puntos;
-        puntosDiv.style.display = 'flex';
+        puntos = Math.round(precio * 10); // 10 puntos por dólar = 10% del precio en puntos
+        puntosTexto.textContent = `Ganas ${puntos} Puntos Xtreme`;
     }
 
     function addToCartWithEdition(game) {
