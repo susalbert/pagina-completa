@@ -174,6 +174,35 @@
             border-bottom: none !important;
         }
         
+        .puntos-ganados {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            margin-top: 15px;
+            background: linear-gradient(135deg, #fff9e6, #fff3d6);
+            border-radius: 10px;
+            border: 1px solid #ffd966;
+            font-weight: bold;
+        }
+        
+        .puntos-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #b85e00;
+        }
+        
+        .puntos-icono {
+            font-size: 1.3em;
+        }
+        
+        .puntos-cantidad {
+            font-size: 1.3em;
+            color: #ff9800;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        
         .metodo-pago {
             display: flex;
             align-items: center;
@@ -408,22 +437,22 @@
                 
                 <div class="linea-total">
                     <span>Subtotal:</span>
-                    <span>$119.98</span>
+                    <span id="subtotal">$119.98</span>
                 </div>
 
                 <div class="linea-total">
                     <span>Descuento puntos:</span>
-                    <span style="color: #4CAF50;">-$0.00</span>
+                    <span style="color: #4CAF50;" id="descuento-puntos">-$0.00</span>
                 </div>
                 
                 <div class="linea-total">
                     <span>Descuento:</span>
-                    <span style="color: #4CAF50;">-$0.00</span>
+                    <span style="color: #4CAF50;" id="descuento-cupon">-$0.00</span>
                 </div>
                 
                 <div class="linea-total">
                     <span>Impuestos (10%):</span>
-                    <span>$12.00</span>
+                    <span id="impuestos">$12.00</span>
                 </div>
                 
                 <div class="linea-total">
@@ -433,7 +462,15 @@
                 
                 <div class="linea-total total-final">
                     <span>Total:</span>
-                    <span>$131.98</span>
+                    <span id="total">$131.98</span>
+                </div>
+                
+                <div class="puntos-ganados" id="puntos-ganados">
+                    <span class="puntos-label">
+                        <span class="puntos-icono">⭐</span>
+                        <span>Puntos Xtreme que ganarás:</span>
+                    </span>
+                    <span class="puntos-cantidad" id="puntos-cantidad">1,320</span>
                 </div>
                 
                 <div class="seguridad-info">
@@ -568,6 +605,22 @@
     </footer>
 
     <script>
+        function calcularPuntos(total) {
+            const totalNumero = parseFloat(total.replace('$', ''));
+            const puntos = Math.round(totalNumero * 10);
+            return puntos.toLocaleString();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const totalElement = document.getElementById('total');
+            const puntosCantidad = document.getElementById('puntos-cantidad');
+            
+            if (totalElement && puntosCantidad) {
+                const puntos = calcularPuntos(totalElement.textContent);
+                puntosCantidad.textContent = puntos;
+            }
+        });
+
         const metodosPago = document.querySelectorAll('.metodo-pago');
         const formularioTarjeta = document.getElementById('form-tarjeta');
         const btnPagar = document.getElementById('btn-pagar');
