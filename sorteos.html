@@ -819,38 +819,34 @@
     
     let ultimosNombresUsados = [];
     
+    function generarParticipanteAleatorio() {
+        const nombre = nombresParticipantes[Math.floor(Math.random() * nombresParticipantes.length)];
+        const icono = iconos[Math.floor(Math.random() * iconos.length)];
+        const numSorteos = Math.floor(Math.random() * 5) + 1;
+        
+        return {
+            nombre: nombre,
+            icono: icono,
+            sorteos: numSorteos
+        };
+    }
+    
     function generarParticipantesUnicos(cantidad) {
         const participantes = [];
+        const nombresUsadosEnEstaTanda = [];
         
-        let nombresDisponibles = [...nombresParticipantes];
-        
-        if (ultimosNombresUsados.length > 0) {
-            nombresDisponibles = nombresDisponibles.filter(n => !ultimosNombresUsados.includes(n));
-        }
-        
-        if (nombresDisponibles.length < cantidad) {
-            const nombresPermitidos = [...nombresParticipantes];
-            for (let i = nombresPermitidos.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [nombresPermitidos[i], nombresPermitidos[j]] = [nombresPermitidos[j], nombresPermitidos[i]];
+        while (participantes.length < cantidad) {
+            const nuevoParticipante = generarParticipanteAleatorio();
+            
+            if (!nombresUsadosEnEstaTanda.includes(nuevoParticipante.nombre) && 
+                !ultimosNombresUsados.includes(nuevoParticipante.nombre)) {
+                
+                nombresUsadosEnEstaTanda.push(nuevoParticipante.nombre);
+                participantes.push(nuevoParticipante);
             }
-            nombresDisponibles = nombresPermitidos;
         }
         
-        for (let i = nombresDisponibles.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [nombresDisponibles[i], nombresDisponibles[j]] = [nombresDisponibles[j], nombresDisponibles[i]];
-        }
-        
-        for (let i = 0; i < Math.min(cantidad, nombresDisponibles.length); i++) {
-            participantes.push({
-                nombre: nombresDisponibles[i],
-                icono: iconos[Math.floor(Math.random() * iconos.length)],
-                sorteos: Math.floor(Math.random() * 5) + 1
-            });
-        }
-        
-        ultimosNombresUsados = participantes.map(p => p.nombre);
+        ultimosNombresUsados = nombresUsadosEnEstaTanda;
         
         return participantes;
     }
