@@ -450,7 +450,6 @@
             <a href="carrito.html">Carrito</a>
             <a href="sugerencias.html">Sugerencias</a>
             <a href="actualizaciones.html">Registro de cambios</a>
-            <a href="sorteos.html" style="color: orangered;">Sorteos</a>
         </nav>
     </div>
 </header>
@@ -818,19 +817,24 @@
     
     const iconos = ["🎮", "💻", "🕹️", "👾", "🖥️"];
     
-    let ultimoNombreUsado = null;
+    let ultimosNombresUsados = [];
     
     function generarParticipantesUnicos(cantidad) {
         const participantes = [];
         
         let nombresDisponibles = [...nombresParticipantes];
         
-        if (ultimoNombreUsado) {
-            nombresDisponibles = nombresDisponibles.filter(n => n !== ultimoNombreUsado);
+        if (ultimosNombresUsados.length > 0) {
+            nombresDisponibles = nombresDisponibles.filter(n => !ultimosNombresUsados.includes(n));
         }
         
         if (nombresDisponibles.length < cantidad) {
-            nombresDisponibles = nombresParticipantes.filter(n => n !== ultimoNombreUsado);
+            const nombresPermitidos = [...nombresParticipantes];
+            for (let i = nombresPermitidos.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [nombresPermitidos[i], nombresPermitidos[j]] = [nombresPermitidos[j], nombresPermitidos[i]];
+            }
+            nombresDisponibles = nombresPermitidos;
         }
         
         for (let i = nombresDisponibles.length - 1; i > 0; i--) {
@@ -846,9 +850,7 @@
             });
         }
         
-        if (participantes.length > 0) {
-            ultimoNombreUsado = participantes[participantes.length - 1].nombre;
-        }
+        ultimosNombresUsados = participantes.map(p => p.nombre);
         
         return participantes;
     }
@@ -898,9 +900,7 @@
             { nombre: "BattlefieldPro", icono: "🖥️", sorteos: 2 }
         ];
         
-        if (participantesIniciales.length > 0) {
-            ultimoNombreUsado = participantesIniciales[participantesIniciales.length - 1].nombre;
-        }
+        ultimosNombresUsados = participantesIniciales.map(p => p.nombre);
         
         participantesIniciales.forEach(p => {
             container.appendChild(crearElementoParticipante(p));
