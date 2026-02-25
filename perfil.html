@@ -165,10 +165,12 @@
             margin-top: 20px;
             padding-top: 20px;
             border-top: 1px solid #ddd;
+            align-items: center;
         }
         
         .estadistica {
             text-align: center;
+            position: relative;
         }
         
         .numero {
@@ -180,6 +182,66 @@
         
         .label {
             color: #666;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        /* NUEVO BOTÓN DE INFORMACIÓN */
+        .info-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background-color: #ff9800;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            margin-left: 5px;
+            padding: 0;
+            line-height: 1;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+        
+        .info-btn:hover {
+            background-color: #e68900;
+            transform: scale(1.1);
+        }
+        
+        /* MODAL PARA INFORMACIÓN DE PUNTOS */
+        .modal-puntos {
+            max-width: 450px;
+        }
+        
+        .modal-puntos h3 {
+            color: #ff9800;
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .modal-puntos ul {
+            padding-left: 20px;
+        }
+        
+        .modal-puntos li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        
+        .modal-puntos .puntos-destacado {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #ff9800;
         }
 
         .configuracion-card {
@@ -489,8 +551,42 @@
                     <span class="label">Juegos</span>
                 </div>
                 <div class="estadistica">
-                    <span class="numero">⭐1,250⭐</span>
-                    <span class="label">Puntos Xtreme [Descuentos]</span>
+                    <span class="numero" id="puntos-usuario">1,250</span>
+                    <span class="label">
+                        Puntos Xtreme [Descuentos]
+                        <button class="info-btn" onclick="abrirModalPuntos()">?</button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- MODAL DE INFORMACIÓN DE PUNTOS -->
+        <div id="modal-puntos" class="modal-overlay" onclick="cerrarModalPuntos(event)">
+            <div class="modal modal-puntos" onclick="event.stopPropagation()">
+                <h3>
+                    <span>⭐</span>
+                    ¿Qué son los Puntos Xtreme?
+                </h3>
+                
+                <div class="puntos-destacado">
+                    <p style="margin: 0; font-weight: bold; color: #ff9800;">Tus puntos actuales: <span id="modal-puntos-cantidad">1,250</span></p>
+                </div>
+                
+                <ul>
+                    <li><strong>Gana puntos:</strong> Por cada compra recibes puntos equivalentes al 10% del total (ej: $100 = 1,000 puntos).</li>
+                    <li><strong>Canjea tus puntos:</strong> 100 puntos = $1 de descuento en tu próxima compra.</li>
+                    <li><strong>Máximo por compra:</strong> Puedes canjear hasta 1,000 puntos ($10) en una sola compra.</li>
+                    <li><strong>Solo múltiplos de 100:</strong> Debes canjear puntos de 100 en 100 (100, 200, 300...).</li>
+                    <li><strong>Participa en sorteos:</strong> Usa 50 puntos para participar en nuestros sorteos diarios.</li>
+                    <li><strong>Los puntos no caducan:</strong> Acumula todos los que quieras y úsalos cuando mejor te convenga.</li>
+                </ul>
+                
+                <p style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-bottom: 0;">
+                    💡 <strong>Consejo:</strong> Cuanto más compras, más puntos acumulas. ¡Revisa los sorteos diarios para ganar premios increíbles!
+                </p>
+                
+                <div class="modal-buttons">
+                    <button class="modal-btn confirm" onclick="cerrarModalPuntos()">Entendido</button>
                 </div>
             </div>
         </div>
@@ -617,6 +713,24 @@
 </footer>
 
 <script>
+    // Función para abrir el modal de puntos
+    function abrirModalPuntos() {
+        // Actualizar la cantidad de puntos en el modal
+        const puntosUsuario = document.getElementById('puntos-usuario').textContent;
+        document.getElementById('modal-puntos-cantidad').textContent = puntosUsuario;
+        
+        document.getElementById('modal-puntos').style.display = 'flex';
+        document.body.classList.add('modal-abierto');
+    }
+    
+    // Función para cerrar el modal de puntos
+    function cerrarModalPuntos(event) {
+        if (!event || event.target === document.getElementById('modal-puntos')) {
+            document.getElementById('modal-puntos').style.display = 'none';
+            document.body.classList.remove('modal-abierto');
+        }
+    }
+    
     function abrirModal(tipo) {
         document.getElementById(`modal-${tipo}`).style.display = 'flex';
         document.body.classList.add('modal-abierto');
@@ -664,7 +778,7 @@
     }
     
     window.onclick = function(event) {
-        if (event.target.classList.contains('modal-overlay')) {
+        if (event.target.classList.contains('modal-overlay') && event.target.id !== 'modal-puntos') {
             event.target.style.display = 'none';
             document.body.classList.remove('modal-abierto');
             if (event.target.id === 'modal-email') {
