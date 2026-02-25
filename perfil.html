@@ -214,7 +214,6 @@
             transform: scale(1.1);
         }
         
-        /* MODAL PARA INFORMACIÓN DE PUNTOS */
         .modal-puntos {
             max-width: 450px;
         }
@@ -551,16 +550,15 @@
                     <span class="label">Juegos</span>
                 </div>
                 <div class="estadistica">
-                    <span class="numero" id="puntos-usuario">1,250</span>
+                    <span class="numero" id="puntos-usuario">⭐1,250⭐</span>
                     <span class="label">
-                        Puntos Xtreme [Descuentos]
+                        Puntos Xtreme
                         <button class="info-btn" onclick="abrirModalPuntos()">?</button>
                     </span>
                 </div>
             </div>
         </div>
         
-        <!-- MODAL DE INFORMACIÓN DE PUNTOS -->
         <div id="modal-puntos" class="modal-overlay" onclick="cerrarModalPuntos(event)">
             <div class="modal modal-puntos" onclick="event.stopPropagation()">
                 <h3>
@@ -582,7 +580,7 @@
                 </ul>
                 
                 <p style="background: #f5f5f5; padding: 10px; border-radius: 5px; margin-bottom: 0;">
-                    💡 <strong>Consejo:</strong> Cuanto más compras, más puntos acumulas. ¡Revisa los sorteos diarios para ganar premios increíbles!
+                    💡 <strong>Consejo:</strong> Cuanto más compras, más puntos acumulas. ¡Revisa los sorteos diarios en la seccion de Videojuegos para ganar premios increíbles!
                 </p>
                 
                 <div class="modal-buttons">
@@ -713,9 +711,7 @@
 </footer>
 
 <script>
-    // Función para abrir el modal de puntos
     function abrirModalPuntos() {
-        // Actualizar la cantidad de puntos en el modal
         const puntosUsuario = document.getElementById('puntos-usuario').textContent;
         document.getElementById('modal-puntos-cantidad').textContent = puntosUsuario;
         
@@ -723,7 +719,6 @@
         document.body.classList.add('modal-abierto');
     }
     
-    // Función para cerrar el modal de puntos
     function cerrarModalPuntos(event) {
         if (!event || event.target === document.getElementById('modal-puntos')) {
             document.getElementById('modal-puntos').style.display = 'none';
