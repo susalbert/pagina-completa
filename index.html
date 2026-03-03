@@ -519,6 +519,33 @@
         zelda: null
     };
 
+    function verificarTodosActivados() {
+        const plataformasEspecificas = ['nintendo', 'playstation', 'xbox', 'pc', 'vr', 'cloud', 'geforce'];
+        
+        const todosActivados = plataformasEspecificas.every(plataforma => 
+            plataformasSeleccionadas.includes(plataforma)
+        );
+        
+        if (todosActivados) {
+            console.log("Todos los filtros activados, activando 'Todos'");
+            
+            const btnTodos = document.querySelector('[data-plataforma="todos"]');
+            btnTodos.classList.add('active');
+            
+            document.querySelectorAll('.filtro-btn').forEach(btn => {
+                if (btn.getAttribute('data-plataforma') !== 'todos') {
+                    btn.classList.remove('active');
+                }
+            });
+            
+            plataformasSeleccionadas = ['todos'];
+            
+            return true;
+        }
+        
+        return false;
+    }
+
     function selectEdition(game, edition, element) {
         const parent = element.parentNode;
         Array.from(parent.children).forEach(child => {
@@ -546,7 +573,6 @@
         puntosTexto.textContent = `Ganas ${puntos} Puntos Xtreme`;
     }
 
-    // Función para juegos con ediciones
     function addToCartWithEdition(game) {
         if (!selectedEdition[game]) {
             alert('Por favor, selecciona una edición');
@@ -593,7 +619,6 @@
         }
     }
     
-    // NUEVA FUNCIÓN para juegos sin ediciones
     function addToCartSimple(nombre, precio) {
         const producto = {
             nombre: nombre,
@@ -676,6 +701,8 @@
                 plataformasSeleccionadas = ['todos'];
             }
         }
+        
+        verificarTodosActivados();
         
         aplicarFiltros();
     }
