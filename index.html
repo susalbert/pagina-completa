@@ -374,7 +374,7 @@
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
                 <p style="font-size: 0.95em;">Platformer 3D</p>
-                <button onclick="location.href='carrito.html'">Añadir al carro</button>
+                <button onclick="addToCartSimple('Super Mario Odyssey', 59.99)">Añadir al carro</button>
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
@@ -390,7 +390,7 @@
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
                 <p style="font-size: 0.95em;">RPG</p>
-                <button onclick="location.href='carrito.html'">Añadir al carro</button>
+                <button onclick="addToCartSimple('Undertale', 59.99)">Añadir al carro</button>
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
@@ -459,7 +459,7 @@
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
                 <p style="font-size: 0.95em;">Platformer 2D</p>
-                <button onclick="location.href='carrito.html'">Añadir al carro</button>
+                <button onclick="addToCartSimple('Hollow Knight: Silksong', 59.99)">Añadir al carro</button>
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
@@ -472,7 +472,7 @@
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
                 <p style="font-size: 0.95em;">Sandbox</p>
-                <button onclick="location.href='carrito.html'">Añadir al carro</button>   
+                <button onclick="addToCartSimple('Hytale', 59.99)">Añadir al carro</button>   
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
@@ -546,6 +546,7 @@
         puntosTexto.textContent = `Ganas ${puntos} Puntos Xtreme`;
     }
 
+    // Función para juegos con ediciones
     function addToCartWithEdition(game) {
         if (!selectedEdition[game]) {
             alert('Por favor, selecciona una edición');
@@ -586,6 +587,25 @@
         localStorage.setItem('carrito', JSON.stringify(carrito));
         
         alert(`✓ Añadido: ${nombre} - ${edicionTexto} ($${precio})`);
+        
+        if (confirm('¿Ir al carrito?')) {
+            window.location.href = 'carrito.html';
+        }
+    }
+    
+    // NUEVA FUNCIÓN para juegos sin ediciones
+    function addToCartSimple(nombre, precio) {
+        const producto = {
+            nombre: nombre,
+            precio: precio,
+            cantidad: 1
+        };
+        
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        
+        alert(`✓ Añadido: ${nombre} ($${precio})`);
         
         if (confirm('¿Ir al carrito?')) {
             window.location.href = 'carrito.html';
