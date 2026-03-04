@@ -390,7 +390,7 @@
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
                 <p style="font-size: 0.95em;">RPG</p>
-                <button onclick="addToCartSimple('Undertale', 59.99)">Añadir al carro</button>
+                <button onclick="addToCartSimple('Undertale', 2.49)">Añadir al carro</button>
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
@@ -459,7 +459,7 @@
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
                 <p style="font-size: 0.95em;">Platformer 2D</p>
-                <button onclick="addToCartSimple('Hollow Knight: Silksong', 59.99)">Añadir al carro</button>
+                <button onclick="addToCartSimple('Hollow Knight: Silksong', 19.99)">Añadir al carro</button>
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
@@ -472,7 +472,7 @@
                     <span class="plataforma-badge vr-badge">VR</span>
                 </h3>
                 <p style="font-size: 0.95em;">Sandbox</p>
-                <button onclick="addToCartSimple('Hytale', 59.99)">Añadir al carro</button>   
+                <button onclick="addToCartSimple('Hytale', 19.99)">Añadir al carro</button>   
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
@@ -612,7 +612,7 @@
         carrito.push(producto);
         localStorage.setItem('carrito', JSON.stringify(carrito));
         
-        alert(`✓ Añadido: ${nombre} - ${edicionTexto} ($${precio})`);
+        alert(`✓ Añadido: ${nombre}: ${edicionTexto} ($${precio})`);
         
         if (confirm('¿Ir al carrito?')) {
             window.location.href = 'carrito.html';
