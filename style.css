@@ -190,6 +190,48 @@ header a:hover{
         url(media/hytale.jpeg);
 }
 
+.carta:nth-child(7){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/SonicXShadow.webp);
+}
+
+
+.carta:nth-child(8){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/sonicsuperstars.webp);
+}
+
+
+.carta:nth-child(9){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/deltarune.webp);
+}
+
+
+.carta:nth-child(10){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/breath.jpg);
+}
+
+
+.carta:nth-child(11){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/3dworld.jpg);
+}
+
+
+.carta:nth-child(12){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/RE2.jpg);
+}
+
+
 #caracteristicas .container{
     text-align: center;
     padding: 200px 12px;

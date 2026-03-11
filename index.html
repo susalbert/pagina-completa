@@ -132,7 +132,9 @@
         .nintendo-badge { background-color: #e60012; }
         .playstation-badge { background-color: #0066cc; }
         .xbox-badge { background-color: #107c10; }
-        .pc-badge { background-color: #333; }
+        .steam-badge { background-color: #0082d8; }
+        .pc-badge { background-color: #8a8a8a; }
+        .epic-badge { background-color: #000000; }
         .vr-badge { background-color: #8a2be2; }
         .cloud-badge { background-color: #00ff15; color: white; }
         .geforce-badge { background-color: #009726; }
@@ -353,6 +355,8 @@
                 <button class="filtro-btn" data-plataforma="nintendo">Nintendo</button>
                 <button class="filtro-btn" data-plataforma="playstation">PlayStation</button>
                 <button class="filtro-btn" data-plataforma="xbox">Xbox</button>
+                <button class="filtro-btn" data-plataforma="steam">Steam</button>
+                <button class="filtro-btn" data-plataforma="epic">Epic Games</button>
                 <button class="filtro-btn" data-plataforma="pc">PC</button>
                 <button class="filtro-btn" data-plataforma="vr">VR</button>
                 <button class="filtro-btn" data-plataforma="cloud">Xbox Cloud Gaming</button>
@@ -381,27 +385,28 @@
                 </div>
             </div>
 
-            <div class="carta game-card" data-name="Undertale" data-genre="RPG" data-plataformas="pc,nintendo,playstation,xbox,cloud" data-precio="59.99">
+            <div class="carta game-card" data-name="Undertale" data-genre="RPG" data-plataformas="steam,nintendo,playstation,xbox,cloud" data-precio="59.99">
                 <h3 style="font-size: 1.1em; line-height: 1.3;">Undertale (Codigo Digital, Global)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
-                    <span class="plataforma-badge pc-badge">PC</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
                 <p style="font-size: 0.95em;">RPG</p>
                 <button onclick="addToCartSimple('Undertale', 2.49)">Añadir al carro</button>
                 <div class="puntos-ganados">
                     <span class="puntos-icono">⭐</span>
-                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                    <span>Ganas <span class="puntos-cantidad">50</span> Puntos Xtreme</span>
                 </div>
             </div>
 
-            <div class="carta game-card" id="battlefield-card" data-name="Battlefield 6" data-genre="FPS" data-plataformas="pc,playstation,xbox,geforce">
+            <div class="carta game-card" id="battlefield-card" data-name="Battlefield 6" data-genre="FPS" data-plataformas="steam,epic,playstation,xbox,geforce">
                 <h3 style="font-size: 1.1em; line-height: 1.3;">Battlefield 6 (Codigo Digital, Global)
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
-                    <span class="plataforma-badge pc-badge">PC</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                    <span class="plataforma-badge epic-badge">Epic Games</span>
                     <span class="plataforma-badge geforce-badge">GeForce</span>
                 </h3>
                 <p style="font-size: 0.95em;">FPS - Elige tu edición</p>
@@ -425,37 +430,38 @@
                 </div>
             </div>
 
-            <div class="carta game-card" id="zelda-card" data-name="The Legend of Zelda: Tears of the Kingdom" data-genre="Aventura" data-plataformas="nintendo">
+            <div class="carta game-card" id="zelda-totk-card" data-name="The Legend of Zelda: Tears of the Kingdom" data-genre="Aventura" data-plataformas="nintendo">
                 <h3 style="font-size: 1.1em; line-height: 1.3;">The Legend of Zelda: Tears of the Kingdom (Fisico) 
                     <span class="plataforma-badge nintendo-badge">Nintendo</span>
                 </h3>
                 <p style="font-size: 0.95em;">Aventura - Elige tu edición</p>
                 
                 <div class="edicion-container">
-                    <div onclick="selectEdition('zelda', 'standard', this)" class="edicion-badge" data-precio="59.99">
+                    <div onclick="selectEdition('zelda-totk', 'standard', this)" class="edicion-badge" data-precio="59.99">
                         <span class="edicion-nombre">Standard</span>
                         <span class="edicion-precio">$59.99</span>
                     </div>
                     
-                    <div onclick="selectEdition('zelda', 'switch2', this)" class="edicion-badge" data-precio="79.99">
+                    <div onclick="selectEdition('zelda-totk', 'switch2', this)" class="edicion-badge" data-precio="79.99">
                         <span class="edicion-nombre">Switch 2 🚀</span>
                         <span class="edicion-precio">$79.99</span>
                     </div>
                 </div>
                 
-                <button id="zelda-btn" onclick="addToCartWithEdition('zelda')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
-                <div class="puntos-ganados" id="puntos-zelda">
+                <button id="zelda-totk-btn" onclick="addToCartWithEdition('zelda-totk')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
+                <div class="puntos-ganados" id="puntos-zelda-totk">
                     <span class="puntos-icono">⭐</span>
-                    <span id="puntos-texto-zelda">Selecciona edición para ver Puntos Xtreme</span>
+                    <span id="puntos-texto-zelda-totk">Selecciona edición para ver Puntos Xtreme</span>
                 </div>
             </div>
 
-            <div class="carta game-card" data-name="Hollow Knight: Silksong" data-genre="Platformer 2D" data-plataformas="pc,nintendo,playstation,xbox,cloud" data-precio="59.99">
+            <div class="carta game-card" data-name="Hollow Knight: Silksong" data-genre="Platformer 2D" data-plataformas="steam,epic,nintendo,playstation,xbox,cloud" data-precio="59.99">
                 <h3 style="font-size: 1.1em; line-height: 1.3;">Hollow Knight: Silksong (Fisico)
                     <span class="plataforma-badge nintendo-badge">N</span>
                     <span class="plataforma-badge playstation-badge">PS</span>
                     <span class="plataforma-badge xbox-badge">XB</span>
-                    <span class="plataforma-badge pc-badge">PC</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                    <span class="plataforma-badge epic-badge">Epic Games</span>
                     <span class="plataforma-badge cloud-badge">XB Cloud</span>
                 </h3>
                 <p style="font-size: 0.95em;">Platformer 2D</p>
@@ -477,6 +483,105 @@
                     <span class="puntos-icono">⭐</span>
                     <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
                 </div>         
+            </div>
+
+            <div class="carta game-card" data-name="SonicXShadow" data-genre="Platformer 3D" data-plataformas="nintendo,playstation,xbox,epic,steam" data-precio="59.99">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Sonic x Shadow Generations (Fisico)
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                    <span class="plataforma-badge epic-badge">Epic Games</span>
+                </h3>
+                <p style="font-size: 0.95em;">Platformer 3D</p>
+                <button onclick="addToCartSimple('Sonic x Shadow Generations', 59.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta game-card" data-name="SonicSuperstars" data-genre="Platformer 3D" data-plataformas="nintendo,playstation,xbox,epic,steam" data-precio="59.99">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Sonic Superstars (Fisico)
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                    <span class="plataforma-badge epic-badge">Epic Games</span>
+                </h3>
+                <p style="font-size: 0.95em;">Platformer 3D</p>
+                <button onclick="addToCartSimple('Sonic Superstars', 59.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta game-card" data-name="Deltarune" data-genre="RPG" data-plataformas="nintendo,playstation,xbox,steam" data-precio="25.00">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Deltarune (Digital)
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">RPG</p>
+                <button onclick="addToCartSimple('Deltarune', 25.00)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">250</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta game-card" id="zelda-botw-card" data-name="The Legend of Zelda: Breath of the Wild" data-genre="Aventura" data-plataformas="nintendo">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">The Legend of Zelda: Breath of the Wild (Fisico)
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">Aventura - Elige tu edición</p>
+                
+                <div class="edicion-container">
+                    <div onclick="selectEdition('zelda-botw', 'standard', this)" class="edicion-badge" data-precio="59.99">
+                        <span class="edicion-nombre">Standard</span>
+                        <span class="edicion-precio">$59.99</span>
+                    </div>
+                    
+                    <div onclick="selectEdition('zelda-botw', 'switch2', this)" class="edicion-badge" data-precio="79.99">
+                        <span class="edicion-nombre">Switch 2 🚀</span>
+                        <span class="edicion-precio">$79.99</span>
+                    </div>
+                </div>
+                
+                <button id="zelda-botw-btn" onclick="addToCartWithEdition('zelda-botw')" disabled style="opacity: 0.5; cursor: not-allowed;">Añadir al carro</button>
+                <div class="puntos-ganados" id="puntos-zelda-botw">
+                    <span class="puntos-icono">⭐</span>
+                    <span id="puntos-texto-zelda-botw">Selecciona edición para ver Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta game-card" data-name="Super Mario 3D World" data-genre="Platformer 3D" data-plataformas="nintendo" data-precio="59.99">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Super Mario 3D World + Bowser's Fury (Fisico)
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                </h3>
+                <p style="font-size: 0.95em;">Platformer 3D</p>
+                <button onclick="addToCartSimple('Super Mario 3D World + Bowsers Fury', 59.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>
+            </div>
+
+            <div class="carta game-card" data-name="Resident Evil 2 Remake" data-genre="Survival Horror" data-plataformas="nintendo,playstation,xbox,steam" data-precio="59.99">
+                <h3 style="font-size: 1.1em; line-height: 1.3;">Resident Evil 2 Remake (Fisico)
+                    <span class="plataforma-badge nintendo-badge">Nintendo</span>
+                    <span class="plataforma-badge playstation-badge">PS</span>
+                    <span class="plataforma-badge xbox-badge">XB</span>
+                    <span class="plataforma-badge steam-badge">Steam</span>
+                </h3>
+                <p style="font-size: 0.95em;">Survival Horror</p>
+                <button onclick="addToCartSimple('Resident Evil 2 Remake', 59.99)">Añadir al carro</button>
+                <div class="puntos-ganados">
+                    <span class="puntos-icono">⭐</span>
+                    <span>Ganas <span class="puntos-cantidad">600</span> Puntos Xtreme</span>
+                </div>
             </div>
 
         </div>
@@ -516,7 +621,8 @@
     
     let selectedEdition = {
         battlefield: null,
-        zelda: null
+        'zelda-totk': null,
+        'zelda-botw': null
     };
 
     function verificarTodosActivados() {
@@ -565,7 +671,9 @@
         let precio, puntos;
         if (game === 'battlefield') {
             precio = edition === 'standard' ? 59.99 : 89.99;
-        } else if (game === 'zelda') {
+        } else if (game === 'zelda-totk') {
+            precio = edition === 'standard' ? 59.99 : 79.99;
+        } else if (game === 'zelda-botw') {
             precio = edition === 'standard' ? 59.99 : 79.99;
         }
         
@@ -590,8 +698,17 @@
                 precio = 89.99;
                 edicionTexto = 'Phantom Edition';
             }
-        } else if (game === 'zelda') {
+        } else if (game === 'zelda-totk') {
             nombre = 'The Legend of Zelda: Tears of the Kingdom';
+            if (selectedEdition[game] === 'standard') {
+                precio = 59.99;
+                edicionTexto = 'Standard Edition';
+            } else {
+                precio = 79.99;
+                edicionTexto = 'Nintendo Switch 2 Edition';
+            }
+        } else if (game === 'zelda-botw') {
+            nombre = 'The Legend of Zelda: Breath of the Wild';
             if (selectedEdition[game] === 'standard') {
                 precio = 59.99;
                 edicionTexto = 'Standard Edition';
