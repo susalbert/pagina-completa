@@ -231,6 +231,24 @@ header a:hover{
         url(media/RE2.jpg);
 }
 
+.carta:nth-child(13){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/dreamland.jpg);
+}
+
+.carta:nth-child(14){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/darksouls.jpg);
+}
+
+.carta:nth-child(15){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/silent.jpg);
+}
+
 
 #caracteristicas .container{
     text-align: center;
