@@ -249,6 +249,24 @@ header a:hover{
         url(media/silent.jpg);
 }
 
+.carta:nth-child(16){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/elden.png);
+}
+
+.carta:nth-child(17){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/re4.png);
+}
+
+.carta:nth-child(18){
+    background-image:
+        linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+        url(media/Doom.png);
+}
+
 
 #caracteristicas .container{
     text-align: center;
